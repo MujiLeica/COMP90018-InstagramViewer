@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6300D43E21457268001CF5F0 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6300D43D21457268001CF5F0 /* CommentViewController.swift */; };
 		637DF3872142D4AC00BF5C83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DF3862142D4AC00BF5C83 /* AppDelegate.swift */; };
 		637DF3892142D4AC00BF5C83 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DF3882142D4AC00BF5C83 /* FirstViewController.swift */; };
 		637DF38B2142D4AC00BF5C83 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DF38A2142D4AC00BF5C83 /* SecondViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6300D43D21457268001CF5F0 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		637DF3832142D4AC00BF5C83 /* InstagramViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637DF3862142D4AC00BF5C83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		637DF3882142D4AC00BF5C83 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				637DF3882142D4AC00BF5C83 /* FirstViewController.swift */,
 				637DF38A2142D4AC00BF5C83 /* SecondViewController.swift */,
 				637DF38C2142D4AC00BF5C83 /* Main.storyboard */,
+				6300D43D21457268001CF5F0 /* CommentViewController.swift */,
 				637DF38F2142D4AD00BF5C83 /* Assets.xcassets */,
 				637DF3912142D4AD00BF5C83 /* LaunchScreen.storyboard */,
 				637DF3942142D4AD00BF5C83 /* Info.plist */,
@@ -267,6 +270,7 @@
 			files = (
 				637DF3B72142DC7100BF5C83 /* RegisterPageViewController.swift in Sources */,
 				637DF38B2142D4AC00BF5C83 /* SecondViewController.swift in Sources */,
+				6300D43E21457268001CF5F0 /* CommentViewController.swift in Sources */,
 				637DF3872142D4AC00BF5C83 /* AppDelegate.swift in Sources */,
 				637DF3B92142DCB600BF5C83 /* LoginPageViewController.swift in Sources */,
 				637DF3892142D4AC00BF5C83 /* FirstViewController.swift in Sources */,
