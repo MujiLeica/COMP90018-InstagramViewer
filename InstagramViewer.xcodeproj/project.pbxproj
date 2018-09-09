@@ -15,6 +15,8 @@
 		637DF3932142D4AD00BF5C83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 637DF3912142D4AD00BF5C83 /* LaunchScreen.storyboard */; };
 		637DF39E2142D4AD00BF5C83 /* InstagramViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DF39D2142D4AD00BF5C83 /* InstagramViewerTests.swift */; };
 		637DF3A92142D4AD00BF5C83 /* InstagramViewerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DF3A82142D4AD00BF5C83 /* InstagramViewerUITests.swift */; };
+		637DF3B72142DC7100BF5C83 /* RegisterPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DF3B62142DC7100BF5C83 /* RegisterPageViewController.swift */; };
+		637DF3B92142DCB600BF5C83 /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DF3B82142DCB600BF5C83 /* LoginPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		637DF3A42142D4AD00BF5C83 /* InstagramViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		637DF3A82142D4AD00BF5C83 /* InstagramViewerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramViewerUITests.swift; sourceTree = "<group>"; };
 		637DF3AA2142D4AD00BF5C83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		637DF3B62142DC7100BF5C83 /* RegisterPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPageViewController.swift; sourceTree = "<group>"; };
+		637DF3B82142DCB600BF5C83 /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				637DF38F2142D4AD00BF5C83 /* Assets.xcassets */,
 				637DF3912142D4AD00BF5C83 /* LaunchScreen.storyboard */,
 				637DF3942142D4AD00BF5C83 /* Info.plist */,
+				637DF3B62142DC7100BF5C83 /* RegisterPageViewController.swift */,
+				637DF3B82142DCB600BF5C83 /* LoginPageViewController.swift */,
 			);
 			path = InstagramViewer;
 			sourceTree = "<group>";
@@ -259,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				637DF3B72142DC7100BF5C83 /* RegisterPageViewController.swift in Sources */,
 				637DF38B2142D4AC00BF5C83 /* SecondViewController.swift in Sources */,
 				637DF3872142D4AC00BF5C83 /* AppDelegate.swift in Sources */,
+				637DF3B92142DCB600BF5C83 /* LoginPageViewController.swift in Sources */,
 				637DF3892142D4AC00BF5C83 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
