@@ -1,0 +1,34 @@
+COMP90018 Mobile Computing Systems Programming
+
+Meeting 1 06/09/18 
+Each team member is responsible for their own code quality, error handling and debugging. Then we divide the rest 36 story points into 4 parts according to functions. Each member is responsible for 9 story points and we plan to burn 3 points every week and leave week 11 for testing.
+
+Chong LIU 
+Register and login screen 
+User Feed - Scroll through photos and comments 
+Used Feed - Like a photo and display users who liked a photo in the feed 
+Used Feed - Leave a comment 
+Used Feed - Sort by both date/time and location 
+Network - Instagram API (Each team member needs to find out how to use Instagram API to implement their own functions)
+
+He ZHU 
+Discover - Search for Users 
+Discover - Display suggested users to follow 
+Discover - Algorithm to suggest users 
+Bluetooth or WiFi Adhoc Feature - In Range Swiping, e.g. Swipe photos to friends nearby that they can view on feed with an "In Range" tag
+
+Yushan WANG 
+Photo - Take a photo with camera while providing flash options 
+Photo - Overlay a grid on top of camera view 
+Photo - Select photo from library instead of taking a new one 
+Photo - Change brightness and contrast 
+Photo - Crop a photo Photo - Apply at least 3 different filters 
+Photo - Upload photo
+
+Lin YANG (absent)
+Activity Feed - Display users following that liked photos or started following user Activity Feed - Display activity of users that current user are following 
+Profile - Display stats on posts, followers and following, profile pic 
+Profile - Display all user photos uploaded 
+Help Yushan Wang achieve 3 points from photo
+
+By 12/09/18 each member should complete 3 story points
