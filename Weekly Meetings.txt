@@ -32,3 +32,85 @@ Profile - Display all user photos uploaded
 Help Yushan Wang achieve 3 points from photo
 
 By 12/09/18 each member should complete 3 story points
+
+
+
+Tuesday 11/09/2018 
+Since Instagram removed a lot of functions from API, we changed to use Firebase instead.
+Assign back end tasks and reassign front end tasks connected with back end
+
+Common Features
+Errors are treated correctly	1
+Code Quality	3
+Network - Implement a server for communications (Firebase)	2
+
+Divide the remaining 34 points into 4 parts according to difficulty and functionality (8+8+9+9)
+
+Server Side Backend Task Allocation
+
+Authentication				Chong
+
+Upload a photo				Chong
+
+Comment					Yushan
+
+User relationship(follow, unfollow)	He	 	
+
+Like a photo					Yang
+
+
+Client Side Task Allocation
+
+Chong LIU	9 points
+Register and login screen							1
+Funtional Tab Bar at bottom of screen with icons (User Feed, Discover, Upload Photo, Activity Feed, Profile)							1
+User Feed - Scroll through photos and comments				2
+Used Feed - Sort by both date/time and location				2
+Photo - Take a photo with camera while providing flash options		2
+Photo - Upload photo								1
+
+
+He ZHU		8 points
+Discover - Search for Users								1
+Discover - Display suggested users to follow					1
+Discover - Algorithm to suggest users						3
+Activity Feed - Display activity of users that current user are following	2
+Profile - Display stats on posts, followers and following, profile pic	1
+
+
+Yushan WANG	9 points
+Used Feed - Leave a comment							1
+Photo - Overlay a grid on top of camera view				1
+Photo - Select photo from library instead of taking a new one		2
+Photo - Change brightness and contrast					1
+Photo - Crop a photo								1
+Photo - Apply at least 3 different filters				3
+
+
+Lin YANG	8 points
+Used Feed - Like a photo and display users who liked a photo in the feed		1
+Activity Feed - Display users following that liked photos or started following user	2
+Bluetooth or WiFi Adhoc Feature - In Range Swiping, e.g. Swipe photos to friends nearby that they can view on feed with an "In Range" tag					4
+Profile - Display all user photos uploaded						1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
