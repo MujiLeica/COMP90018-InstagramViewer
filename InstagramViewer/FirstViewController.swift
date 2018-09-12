@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -30,6 +31,14 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //    override func viewDidAppear(_ animated: Bool) {
 //            self.performSegue(withIdentifier: "loginView", sender: self)
 //    }
+    
+    
+    
+    @IBAction func logOut(_ sender: UIBarButtonItem) {
+        try! Auth.auth().signOut()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     
     // The number of sections

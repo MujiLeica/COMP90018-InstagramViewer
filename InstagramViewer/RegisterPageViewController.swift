@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterPageViewController: UIViewController {
 
@@ -43,14 +44,22 @@ class RegisterPageViewController: UIViewController {
         if (username!.isEmpty || password!.isEmpty || repeatPassword!.isEmpty){
             displayAlertMessage(alertMessage: "Fields can't be empty.")
         }
-        
-        
         // check if passwords matches
-        if (password != repeatPassword) {
+        else if (password != repeatPassword) {
             displayAlertMessage(alertMessage: "Password not match.")
         }
         // save username and password
-        //UserDefaults.standardUserDefaults.setObjecct(username, forkey:"userName")
+        else {
+            Auth.auth().createUser(withEmail: username!, password: password!) { (user, error) in
+                if error == nil && user != nil {
+                    self.displayAlertMessage(alertMessage: "User Created")
+                    self.dismiss(animated: true, completion: nil)
+                }
+                else {
+                    self.displayAlertMessage(alertMessage: "Error: \(error?.localizedDescription)")
+                }
+            }
+        }
     }
     
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginPageViewController: UIViewController {
 
@@ -33,19 +34,23 @@ class LoginPageViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func loginButton(_ sender: Any) {
+    
+    @IBAction func logIn(_ sender: Any) {
         let username = usernameTextField.text
         let password = passwordTextField.text
         
         if (username!.isEmpty || password!.isEmpty) {
             displayAlertMessage(alertMessage: "Username or Password can't be empty.")
         }
-        else if (username == "admin" && password == "admin") {
-            //self.dismiss(animated: true, completion: nil)
-            self.performSegue(withIdentifier: "homePage", sender: self)
-        }
         else {
-            displayAlertMessage(alertMessage: "Incorrect Username and Password. Try Again.")
+            Auth.auth().signIn(withEmail: username!, password: password!) { (user, error) in
+                if error == nil && user != nil {
+                    self.performSegue(withIdentifier: "homePage", sender: self)
+                }
+                else {
+                    self.displayAlertMessage(alertMessage: "Error: \(error!.localizedDescription)")
+                }
+            }
         }
     }
     
