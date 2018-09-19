@@ -8,6 +8,8 @@ target 'InstagramViewer' do
   # Pods for InstagramViewer
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
+pod 'Firebase/Database'
+pod 'Firebase/Storage'
 
   target 'InstagramViewerTests' do
     inherit! :search_paths

@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class RegisterPageViewController: UIViewController {
 
@@ -52,11 +53,19 @@ class RegisterPageViewController: UIViewController {
         else {
             Auth.auth().createUser(withEmail: username!, password: password!) { (user, error) in
                 if error == nil && user != nil {
-                    self.displayAlertMessage(alertMessage: "User Created")
+                    let ref = Database.database().reference()
+                    print(ref.description())
+                    let usersReference = ref.child("users")
+                    print(usersReference.description())
+                    let userID = user?.user.uid
+                    print(userID!)
+                    let newUserReference = usersReference.child(userID!)
+                    newUserReference.setValue(["username": username])
+                    //self.displayAlertMessage(alertMessage: "User Created")
                     self.dismiss(animated: true, completion: nil)
                 }
                 else {
-                    self.displayAlertMessage(alertMessage: "Error: \(error?.localizedDescription)")
+                    self.displayAlertMessage(alertMessage: "Error: \(String(describing: error?.localizedDescription))")
                 }
             }
         }
