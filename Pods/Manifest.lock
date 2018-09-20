@@ -1,4 +1,5 @@
 PODS:
+  - CropViewController (2.3.8)
   - Firebase/Auth (5.7.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.3)
@@ -70,6 +71,7 @@ PODS:
   - nanopb/encode (0.3.8)
 
 DEPENDENCIES:
+  - CropViewController
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -77,6 +79,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CropViewController
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -92,6 +95,7 @@ SPEC REPOS:
     - nanopb
 
 SPEC CHECKSUMS:
+  CropViewController: 7be882b7d3fb3faef48a41924e80f689e9df2514
   Firebase: 734a4f92957aa6c40e7ae3fda3d9359e1890aa87
   FirebaseAnalytics: 993577e91157feb40945abedd6ab346d8a4b6ac8
   FirebaseAuth: 657a25e4be044d2d333663ebf515a861c5a59cd7
@@ -106,6 +110,6 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: 40ba08ab2f4da8447098f0ab9c87d1dc91abbc0b
+PODFILE CHECKSUM: 02c96993704379d5636f31a3da04819355110e0f
 
 COCOAPODS: 1.5.3
