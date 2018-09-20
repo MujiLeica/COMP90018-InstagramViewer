@@ -63,11 +63,11 @@ Client Side Task Allocation
 
 Chong LIU	9 points
 Register and login screen							1
-Funtional Tab Bar at bottom of screen with icons (User Feed, Discover, Upload Photo, Activity Feed, Profile)							1
-User Feed - Scroll through photos and comments				2
-Used Feed - Sort by both date/time and location				2
-Photo - Take a photo with camera while providing flash options		2
-Photo - Upload photo								1
+Funtional Tab Bar at bottom of screen with icons (User Feed, Discover, Upload Photo, Activity Feed, Profile)												1
+User Feed - Scroll through photos and comments					2
+Used Feed - Sort by both date/time and location					2
+Photo - Crop a photo								1
+Photo - Select photo from library instead of taking a new one			2
 
 
 He ZHU		8 points
@@ -80,11 +80,11 @@ Profile - Display stats on posts, followers and following, profile pic	1
 
 Yushan WANG	9 points
 Used Feed - Leave a comment							1
-Photo - Overlay a grid on top of camera view				1
-Photo - Select photo from library instead of taking a new one		2
-Photo - Change brightness and contrast					1
-Photo - Crop a photo								1
-Photo - Apply at least 3 different filters				3
+Photo - Overlay a grid on top of camera view					1
+Photo - Upload photo								1
+Photo - Change brightness and contrast						1
+Photo - Take a photo with camera while providing flash options			2
+Photo - Apply at least 3 different filters					3
 
 
 Lin YANG	8 points
