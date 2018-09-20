@@ -369,7 +369,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DXx-Hg-eJd"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Camera" id="Eg4-Dd-WLG"/>
+                    <navigationItem key="navigationItem" title="Camera" id="Eg4-Dd-WLG">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="Igs-kp-g1r">
+                            <connections>
+                                <action selector="cancelButton:" destination="Gq5-tw-REB" id="335-F5-kYR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="captionTextView" destination="BgT-4C-cQ2" id="d2X-BQ-wox"/>
                         <outlet property="photo" destination="4R3-Pt-KjM" id="uml-cb-bJt"/>

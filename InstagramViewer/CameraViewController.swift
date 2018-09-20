@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import CropViewController
@@ -58,27 +59,44 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage{
             presentCropViewController(input: image)
         }
-        //dismiss(animated: true, completion: nil)
     }
-    
-    
 
     @IBAction func shareButtonClicked(_ sender: Any) {
         if let uploadPhoto = self.selectedImage, let imageData = UIImageJPEGRepresentation(uploadPhoto, 0.1) {
             let photoIDString = NSUUID().uuidString
-            let storageRef = Storage.storage().reference(forURL: "gs://comp90018instagramviewer.appspot.com").child("posts").child(photoIDString)
+            let storageRef = Storage.storage().reference(forURL: "gs://comp90018instagramviewer.appspot.com").child("Posts").child(photoIDString)
             storageRef.putData(imageData, metadata: nil, completion: { (uploadMetadata, error) in
                 if error != nil {
                     return
                 }
                 print("success")
-                //let photoURL = uploadMetadata.
+                let path = uploadMetadata!.path
+                print(path!)
+                
+                let caption = self.captionTextView.text
+                let currentUser = Auth.auth().currentUser?.uid
+                
+                let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("users").child(currentUser!)
+                DBref.setValue(["User": currentUser, "Path": path, "Caption": caption])
+         
+                self.clean()
+                self.tabBarController?.selectedIndex = 0
+                
             })
         }
     }
     
     
+    @IBAction func cancelButton(_ sender: Any) {
+        self.clean()
+        self.tabBarController?.selectedIndex = 0
+    }
     
+    func clean() {
+        self.captionTextView.text = ""
+        self.photo.image = UIImage(named: "Placeholder-image")
+        self.selectedImage = nil
+    }
     
     
     //TOCropViewController
