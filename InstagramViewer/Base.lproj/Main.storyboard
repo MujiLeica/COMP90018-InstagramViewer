@@ -65,7 +65,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Feed" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="Home" selectedImage="Home_Selected" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" title="Title" id="3G5-KL-E7v"/>
                     <connections>
                         <outlet property="tableView" destination="SK6-Sr-qKm" id="oUw-wH-Q0S"/>
@@ -325,12 +325,28 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discover" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="Search" selectedImage="Search_Selected" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Title" id="6DO-CQ-zS8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="1161" y="369"/>
+        </scene>
+        <!--Camera-->
+        <scene sceneID="2JF-8I-dG5">
+            <objects>
+                <viewController id="Gq5-tw-REB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K1V-Nn-RPh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="DXx-Hg-eJd"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Camera" image="Photo" id="w1L-8P-qzQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Buv-vX-wrN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1" y="853"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -344,6 +360,7 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="Gq5-tw-REB" kind="relationship" relationship="viewControllers" id="YCM-1o-XKP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -352,7 +369,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="Home" width="21" height="23"/>
+        <image name="Home_Selected" width="21" height="23"/>
+        <image name="Photo" width="22" height="23"/>
+        <image name="Search" width="23" height="22"/>
+        <image name="Search_Selected" width="23" height="22"/>
     </resources>
 </document>
