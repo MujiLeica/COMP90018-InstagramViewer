@@ -11,6 +11,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'CropViewController'
+pod 'SwiftyJSON'
 
   target 'InstagramViewerTests' do
     inherit! :search_paths

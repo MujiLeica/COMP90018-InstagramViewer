@@ -54,11 +54,8 @@ class RegisterPageViewController: UIViewController {
             Auth.auth().createUser(withEmail: username!, password: password!) { (user, error) in
                 if error == nil && user != nil {
                     let ref = Database.database().reference()
-                    print(ref.description())
                     let usersReference = ref.child("users")
-                    print(usersReference.description())
                     let userID = user?.user.uid
-                    print(userID!)
                     let newUserReference = usersReference.child(userID!)
                     newUserReference.setValue(["username": username])
                     //self.displayAlertMessage(alertMessage: "User Created")

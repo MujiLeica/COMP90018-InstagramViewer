@@ -23,6 +23,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        captionTextView.text = "What's on your mind?"
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoClick))
         photo.addGestureRecognizer(tapGesture)
         photo.isUserInteractionEnabled = true
@@ -60,23 +61,73 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
             presentCropViewController(input: image)
         }
     }
-
+    
+//    func save() {
+//        // 1. create a new database reference
+//        let newPostRef = Database.database().reference().child("Posts").childByAutoId()
+//        let newPostKey = newPostRef.key
+//        if let imageData = UIImageJPEGRepresentation(self.selectedImage!, 0.1) {
+//
+//            // 2. create a new storage reference
+//            let imageStorageReference = Storage.storage().reference().child("Images")
+//            let newImageRef = imageStorageReference.child("newPostKey")
+//
+//            // 3. save image to storage
+//            newImageRef.putData(imageData).observe(.success) { (snapshot) in
+//
+//                // 4. save post, caption and download url to database
+//                let imageDownloadURL = snapshot.metadata?.storageReference?.downloadURL(completion: { (url, error) in
+//                    if error != nil {
+//                        return
+//                    }
+//                    return url
+//                })
+//
+//                let newPostDictionary = ["imageDownloadURL": imageDownloadURL, "Caption": captionTextView.text]
+//            }
+//        }
+//    }
+    
+    
+    
+    
+//    let ref = Database.database().reference()
+//    let usersReference = ref.child("users")
+//    let userID = user?.user.uid
+//    let newUserReference = usersReference.child(userID!)
+//    newUserReference.setValue(["username": username])
+    
+    
+    
     @IBAction func shareButtonClicked(_ sender: Any) {
         if let uploadPhoto = self.selectedImage, let imageData = UIImageJPEGRepresentation(uploadPhoto, 0.1) {
-            let photoIDString = NSUUID().uuidString
-            let storageRef = Storage.storage().reference(forURL: "gs://comp90018instagramviewer.appspot.com").child("Posts").child(photoIDString)
+            let postIDString = NSUUID().uuidString
+            let storageRef = Storage.storage().reference(forURL: "gs://comp90018instagramviewer.appspot.com").child("Posts").child(postIDString)
             storageRef.putData(imageData, metadata: nil, completion: { (uploadMetadata, error) in
                 if error != nil {
                     return
                 }
                 print("success")
                 let path = uploadMetadata!.path
+                
+//                let postURL = storageRef.downloadURL(completion: { (url, error) in
+//                    if error != nil {
+//                        print(error!)
+//                    }
+//                    else {
+//                        return url.absoluteString
+//                    }
+//                })
+                
                 print(path!)
                 
                 let caption = self.captionTextView.text
                 let currentUser = Auth.auth().currentUser?.uid
+                let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("users").child(currentUser!).child(postIDString)
+                //let DBref = Database.database().reference().child("users").child(postIDString)
+
                 
-                let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("users").child(currentUser!)
+//                DBref.setValue(["User": currentUser, "Path": path, "Caption": caption])
                 DBref.setValue(["User": currentUser, "Path": path, "Caption": caption])
          
                 self.clean()
