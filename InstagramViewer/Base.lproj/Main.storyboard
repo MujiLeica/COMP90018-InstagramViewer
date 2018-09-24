@@ -341,7 +341,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="W7a-YH-abp" kind="relationship" relationship="rootViewController" id="jZ9-JV-neI"/>
+                        <segue destination="zt5-F8-2Uu" kind="relationship" relationship="rootViewController" id="4fh-oF-nfp"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9qN-69-AUI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,33 +349,45 @@
             <point key="canvasLocation" x="1201" y="-816"/>
         </scene>
         <!--User Feed-->
-        <scene sceneID="FkW-ui-jXt">
+        <scene sceneID="qMX-jD-mSS">
             <objects>
-                <tableViewController id="W7a-YH-abp" customClass="UserFeedTableViewController" customModule="InstagramViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vQg-E1-X51">
+                <viewController id="zt5-F8-2Uu" customClass="HomeViewController" customModule="InstagramViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mS5-Aw-Bcl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dyG-pk-I6A">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostCell" id="KRe-Wc-wxp">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KRe-Wc-wxp" id="fVj-Vc-8uq">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="md9-rB-FF2">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="md9-rB-FF2" id="tDj-2V-Um9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="W7a-YH-abp" id="esE-yN-qN4"/>
-                            <outlet property="delegate" destination="W7a-YH-abp" id="Ydr-Lc-r5C"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="User Feed" id="fwV-1t-AxE"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nSV-jh-9Gx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="dyG-pk-I6A" firstAttribute="bottom" secondItem="B5d-nL-haA" secondAttribute="bottom" id="DJh-Yd-tKi"/>
+                            <constraint firstItem="dyG-pk-I6A" firstAttribute="leading" secondItem="B5d-nL-haA" secondAttribute="leading" id="bdd-ZZ-6zL"/>
+                            <constraint firstItem="dyG-pk-I6A" firstAttribute="trailing" secondItem="B5d-nL-haA" secondAttribute="trailing" id="uj6-RL-r0Q"/>
+                            <constraint firstItem="dyG-pk-I6A" firstAttribute="top" secondItem="B5d-nL-haA" secondAttribute="top" id="yzX-9c-49H"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="B5d-nL-haA"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="User Feed" id="0KX-CU-O9C"/>
+                    <connections>
+                        <outlet property="tableView" destination="dyG-pk-I6A" id="bHZ-9b-o4q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w6A-Sn-bKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2001" y="-816"/>
+            <point key="canvasLocation" x="2077.5999999999999" y="-816.34182908545733"/>
         </scene>
         <!--Discover-->
         <scene sceneID="DWc-73-OBT">
