@@ -18,12 +18,12 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     @IBOutlet weak var captionTextView: UITextView!
     @IBOutlet weak var shareButton: UIButton!
     var selectedImage: UIImage?
-    
+    var textViewPlaceHolderMessage = "What's on your mind?"
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        captionTextView.text = "What's on your mind?"
+        captionTextView.text = textViewPlaceHolderMessage
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoClick))
         photo.addGestureRecognizer(tapGesture)
         photo.isUserInteractionEnabled = true
@@ -100,36 +100,33 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     
     
     @IBAction func shareButtonClicked(_ sender: Any) {
-        if let uploadPhoto = self.selectedImage, let imageData = UIImageJPEGRepresentation(uploadPhoto, 0.1) {
-            let postIDString = NSUUID().uuidString
-            let storageRef = Storage.storage().reference(forURL: "gs://comp90018instagramviewer.appspot.com").child("Posts").child(postIDString)
+        //var postURL: String?
+        if let imageData = UIImageJPEGRepresentation(self.selectedImage!, 0.05) {
+            let postID = NSUUID().uuidString
+            let storageRef = Storage.storage().reference(forURL: "gs://comp90018instagramviewer.appspot.com").child("Posts").child(postID)
             storageRef.putData(imageData, metadata: nil, completion: { (uploadMetadata, error) in
                 if error != nil {
                     return
                 }
-                print("success")
+                print("Post Upload Success")
+                
                 let path = uploadMetadata!.path
                 
-//                let postURL = storageRef.downloadURL(completion: { (url, error) in
-//                    if error != nil {
-//                        print(error!)
-//                    }
-//                    else {
-//                        return url.absoluteString
-//                    }
-//                })
-                
-                print(path!)
-                
+                //push post data in database
                 let caption = self.captionTextView.text
                 let currentUser = Auth.auth().currentUser?.uid
-                let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("users").child(currentUser!).child(postIDString)
-                //let DBref = Database.database().reference().child("users").child(postIDString)
-
+                let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("users").child(currentUser!).child(postID)
                 
-//                DBref.setValue(["User": currentUser, "Path": path, "Caption": caption])
-                DBref.setValue(["User": currentUser, "Path": path, "Caption": caption])
-         
+//                storageRef.downloadURL(completion: { (url, error) in
+//                    if error != nil {
+//                        return
+//                    }
+//                    else {
+//                        postURL = url!.absoluteString
+//                    }
+//                })
+                DBref.setValue(["Path": path, "Caption": caption])
+                
                 self.clean()
                 self.tabBarController?.selectedIndex = 0
                 

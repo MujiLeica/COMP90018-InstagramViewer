@@ -1,5 +1,5 @@
 //
-//  UserFeedViewController.swift
+//  ProfileViewController.swift
 //  InstagramViewer
 //
 //  Created by CHONG LIU on 24/9/18.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-class UserFeedViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,11 @@ class UserFeedViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func logout(_ sender: Any) {
+        try! Auth.auth().signOut()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

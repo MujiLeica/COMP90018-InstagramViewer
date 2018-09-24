@@ -45,6 +45,8 @@ class LoginPageViewController: UIViewController {
         else {
             Auth.auth().signIn(withEmail: username!, password: password!) { (user, error) in
                 if error == nil && user != nil {
+                    self.usernameTextField.text = ""
+                    self.passwordTextField.text = ""
                     self.performSegue(withIdentifier: "homePage", sender: self)
                 }
                 else {

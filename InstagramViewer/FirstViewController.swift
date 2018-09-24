@@ -18,6 +18,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var imagePath: String!
     var caption: String!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,9 +50,12 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print (pathRef)
             
         }
-        // 2. parse each of the post
         
-        // 3. update table view
+        DispatchQueue.main.async {
+            // 3. update table view
+            self.tableView.reloadData()
+        }
+        
         
     }
 
@@ -59,14 +64,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
 
-//    override func viewDidAppear(_ animated: Bool) {
-//            self.performSegue(withIdentifier: "loginView", sender: self)
-//    }
     
-    @IBAction func logOut(_ sender: Any) {
-        try! Auth.auth().signOut()
-        self.dismiss(animated: true, completion: nil)
-    }
+//    @IBAction func logOut(_ sender: Any) {
+//        try! Auth.auth().signOut()
+//        self.dismiss(animated: true, completion: nil)
+//    }
     
     
     
@@ -75,11 +77,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return 1
     }
     
-    // Title for section's header
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Section \(section)"
-        return "UserName"
-    }
+//    // Title for section's header
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "UserName"
+//    }
     
     // The number of rows in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,9 +95,5 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return UITableViewCell()
         }
     }
-    
-    
-    
-
 }
 
