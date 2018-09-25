@@ -164,10 +164,13 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         // 'image' is the newly cropped version of the original image
         selectedImage = image
         photo.image = image
-        self.dismiss(animated: true, completion: {self.performSegue(withIdentifier: "filter_segue", sender: nil)
-    })
-    }
+        self.dismiss(animated: true, completion: nil)
+        }    
 
+    @IBAction func filterButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "filter_segue", sender: nil)
+        }
+    
     func topMostController() -> UIViewController {
         var topController: UIViewController = UIApplication.shared.keyWindow!.rootViewController!
         while (topController.presentedViewController != nil) {
