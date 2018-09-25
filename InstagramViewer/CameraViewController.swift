@@ -110,22 +110,26 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                 }
                 print("Post Upload Success")
                 
-                let path = uploadMetadata!.path
+                //let path = uploadMetadata!.path
+                
+                
+                
                 
                 //push post data in database
                 let caption = self.captionTextView.text
                 let currentUser = Auth.auth().currentUser?.uid
                 let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("users").child(currentUser!).child(postID)
                 
-//                storageRef.downloadURL(completion: { (url, error) in
-//                    if error != nil {
-//                        return
-//                    }
-//                    else {
-//                        postURL = url!.absoluteString
-//                    }
-//                })
-                DBref.setValue(["Path": path, "Caption": caption])
+                storageRef.downloadURL(completion: { (url, error) in
+                    if error != nil {
+                        return
+                    }
+                    else {
+                        let postURL = url!.absoluteString
+                        DBref.setValue(["Path": postURL, "Caption": caption])
+                    }
+                })
+                //DBref.setValue(["Path": path, "Caption": caption])
                 
                 self.clean()
                 self.tabBarController?.selectedIndex = 0

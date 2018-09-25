@@ -15,6 +15,5 @@ class PostCell {
     init(captionText: String, postUrl: String) {
         caption = captionText
         path = postUrl
-        
     }
 }

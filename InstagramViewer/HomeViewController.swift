@@ -9,14 +9,15 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import SDWebImage
 
 class HomeViewController: UIViewController { 
-    
     @IBOutlet weak var tableView: UITableView!
     var posts = [PostCell]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 500
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         loadPosts()
 
@@ -47,12 +48,18 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
+        //return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
-        cell.backgroundColor = UIColor.red
-        cell.textLabel?.text = posts[indexPath.row].caption
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
+        let post = posts[indexPath.row]
+        cell.captionLabel.text = post.caption
+        let postURLString = post.path
+        let postURL = URL(string: postURLString)
+        cell.postImageView.sd_setImage(with: postURL, completed: nil)
+        
+
         return cell
     }
 }
