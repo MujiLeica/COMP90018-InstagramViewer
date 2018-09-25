@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  DiscoverViewController.swift
 //  InstagramViewer
 //
 //  Created by CHONG LIU on 8/9/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class DiscoverViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var ImageView: UIImageView!
     override func viewDidLoad() {
