@@ -16,7 +16,8 @@ class HomeViewController: UIViewController {
     var posts = [PostCell]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = 500
+    
+        tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         loadPosts()
