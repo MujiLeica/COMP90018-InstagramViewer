@@ -117,8 +117,13 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                 
                 //push post data in database
                 let caption = self.captionTextView.text
-                let currentUser = Auth.auth().currentUser?.uid
-                let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("users").child(currentUser!).child(postID)
+                // let currentUser = Auth.auth().currentUser?.uid
+                // put the posts to a new database tree
+                print("the data is not denied here")
+                let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("posts")
+                print("line 124")
+                let newPostId = DBref.childByAutoId().key
+                let newPostRef = DBref.child(newPostId)
                 
                 storageRef.downloadURL(completion: { (url, error) in
                     if error != nil {
@@ -126,7 +131,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                     }
                     else {
                         let postURL = url!.absoluteString
-                        DBref.setValue(["Path": postURL, "Caption": caption])
+                        newPostRef.setValue(["Path": postURL, "Caption": caption])
                     }
                 })
                 //DBref.setValue(["Path": path, "Caption": caption])
@@ -137,7 +142,6 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
             })
         }
     }
-    
     
     @IBAction func cancelButton(_ sender: Any) {
         self.clean()

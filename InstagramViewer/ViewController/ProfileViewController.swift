@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let userID = Auth.auth().currentUser?.uid
         return 1
     }
     

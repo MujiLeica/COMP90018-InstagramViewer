@@ -21,16 +21,11 @@ class HomeViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         loadPosts()
-
-        
-//        var post = PostCell(captionText: "wahaha", postUrl: "abcdefg")
-//        print(post.caption)
-//        print(post.path)
     }
     
     func loadPosts() {
-        let userID = Auth.auth().currentUser?.uid
-        Database.database().reference().child("users").child(userID!).observe(.childAdded) { (snapshot) in
+        // let userID = Auth.auth().currentUser?.uid
+        Database.database().reference().child("posts").observe(.childAdded) { (snapshot) in
             //print(snapshot.value!)
             
             if let dict = snapshot.value as? [String: Any] {
@@ -59,7 +54,6 @@ extension HomeViewController: UITableViewDataSource {
         let postURLString = post.path
         let postURL = URL(string: postURLString)
         cell.postImageView.sd_setImage(with: postURL, completed: nil)
-        
 
         return cell
     }
