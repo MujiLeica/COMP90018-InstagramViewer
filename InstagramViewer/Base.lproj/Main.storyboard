@@ -331,6 +331,11 @@
                                                 <constraint firstAttribute="height" constant="100" id="4ry-WE-qMJ"/>
                                                 <constraint firstAttribute="width" constant="100" id="vMh-cA-mbC"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bDn-bq-pzD">
                                             <rect key="frame" x="131" y="23" width="228" height="64"/>
@@ -453,6 +458,7 @@
                                         <outlet property="followingCountLabel" destination="kcR-tY-4Sb" id="N6c-9T-s8A"/>
                                         <outlet property="myPostsCountLabel" destination="OtG-ZW-iRm" id="zcO-c2-VEJ"/>
                                         <outlet property="nameLabel" destination="ZEc-7g-vVp" id="cqP-BR-A2d"/>
+                                        <outlet property="profileImg" destination="eoK-zR-7gn" id="83b-4k-ZuB"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>

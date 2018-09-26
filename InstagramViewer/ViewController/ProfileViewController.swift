@@ -43,9 +43,10 @@ extension ProfileViewController: UICollectionViewDataSource {
         return cell
     }
     
+    // reusable code
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as! HeaderProfileCollectionReusableView
-      
+      headerViewCell.updateView()
         return headerViewCell
     }
     
