@@ -8,12 +8,23 @@
 
 import UIKit
 
+protocol FilterViewControllerDelegate{
+    func updateImage(image: UIImage)
+}
+
 class FilterViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var filterPhoto: UIImageView!
     var selectedImage: UIImage!
-    var CIFilters = ["CIPhotoEffectMono","CIFalseColor","CIColorMap","CIGaussianBlur"]
+    var delegate: FilterViewControllerDelegate?
+    var CIFilters = [
+        "CIPhotoEffectMono",
+        "CIFalseColor",
+        "CIColorMap",
+        "CIGaussianBlur"
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        filterPhoto.image = selectedImage
@@ -24,6 +35,9 @@ class FilterViewController: UIViewController {
     }
     
     @IBAction func nextButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        delegate?.updateImage(image: self.filterPhoto.image!)
+        
     }
 }
 
@@ -42,4 +56,12 @@ extension FilterViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return CIFilters.count
 }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let ciImage = CIImage(image: selectedImage)
+        let filter = CIFilter(name: CIFilters[indexPath.item])
+        filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        if let filteredImage = filter?.value(forKey: kCIOutputImageKey) as? CIImage {
+            self.filterPhoto.image = UIImage(ciImage: filteredImage)
+        }
+    }
 }

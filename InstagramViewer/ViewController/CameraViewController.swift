@@ -158,7 +158,10 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         if segue.identifier == "filter_segue" {
             let filterVC = segue.destination as! FilterViewController
             filterVC.selectedImage = self.selectedImage
+            filterVC.delegate = self
         }
+        
+    }
     
     
     //TOCropViewController
@@ -190,3 +193,8 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     }
 }
 
+extension CameraViewController: FilterViewControllerDelegate{
+    func updateImage(image: UIImage) {
+        self.photo.image = image
+    }
+}
