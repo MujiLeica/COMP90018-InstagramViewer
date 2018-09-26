@@ -253,10 +253,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKa-wZ-Ir1">
                                 <rect key="frame" x="8" y="521" width="359" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Filters" backgroundImage="Placeholder-image">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="lightTextColor"/>
-                                </state>
+                                <state key="normal" title="Add Filters" backgroundImage="Placeholder-image"/>
                                 <connections>
                                     <action selector="filterButton:" destination="Gq5-tw-REB" eventType="touchUpInside" id="byS-gB-mSC"/>
                                 </connections>
@@ -721,12 +718,12 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-NA-qeZ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-NA-qeZ">
                                 <rect key="frame" x="0.0" y="66" width="375" height="419"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="weN-ww-DH1">
-                                <rect key="frame" x="0.0" y="493" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="505" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Jd3-uQ-dur">
@@ -735,6 +732,10 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <imageView key="backgroundView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1U6-A4-fuT">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilterCollectionViewCell" id="V0R-ri-Ct3" customClass="FilterCollectionViewCell" customModule="InstagramViewer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -742,7 +743,21 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yr9-1t-3pD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="Yr9-1t-3pD" firstAttribute="leading" secondItem="V0R-ri-Ct3" secondAttribute="leading" id="8WL-gq-7bb"/>
+                                            <constraint firstAttribute="bottom" secondItem="Yr9-1t-3pD" secondAttribute="bottom" id="AY3-0s-dcV"/>
+                                            <constraint firstItem="Yr9-1t-3pD" firstAttribute="top" secondItem="V0R-ri-Ct3" secondAttribute="top" id="hpM-kS-GHZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yr9-1t-3pD" secondAttribute="trailing" id="mLh-aL-sLj"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="filterPhoto" destination="Yr9-1t-3pD" id="zVR-Fe-bJt"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

@@ -154,6 +154,12 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         self.selectedImage = nil
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "filter_segue" {
+            let filterVC = segue.destination as! FilterViewController
+            filterVC.selectedImage = self.selectedImage
+        }
+    
     
     //TOCropViewController
     func presentCropViewController(input: UIImage) {
