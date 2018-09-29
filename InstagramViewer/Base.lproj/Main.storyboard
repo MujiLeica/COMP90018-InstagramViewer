@@ -692,7 +692,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B5d-nL-haA"/>
                     </view>
-                    <navigationItem key="navigationItem" title="User Feed" id="0KX-CU-O9C"/>
+                    <navigationItem key="navigationItem" title="User Feed" id="0KX-CU-O9C">
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="uUK-X7-8Rt">
+                            <connections>
+                                <action selector="sortButton:" destination="zt5-F8-2Uu" id="XrJ-oM-g9G"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="dyG-pk-I6A" id="bHZ-9b-o4q"/>
                     </connections>

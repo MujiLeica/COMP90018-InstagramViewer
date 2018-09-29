@@ -27,6 +27,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoClick))
         photo.addGestureRecognizer(tapGesture)
         photo.isUserInteractionEnabled = true
+        shareButton.isEnabled = false
     }
 
     @objc func photoClick() {
@@ -62,40 +63,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         }
     }
     
-//    func save() {
-//        // 1. create a new database reference
-//        let newPostRef = Database.database().reference().child("Posts").childByAutoId()
-//        let newPostKey = newPostRef.key
-//        if let imageData = UIImageJPEGRepresentation(self.selectedImage!, 0.1) {
-//
-//            // 2. create a new storage reference
-//            let imageStorageReference = Storage.storage().reference().child("Images")
-//            let newImageRef = imageStorageReference.child("newPostKey")
-//
-//            // 3. save image to storage
-//            newImageRef.putData(imageData).observe(.success) { (snapshot) in
-//
-//                // 4. save post, caption and download url to database
-//                let imageDownloadURL = snapshot.metadata?.storageReference?.downloadURL(completion: { (url, error) in
-//                    if error != nil {
-//                        return
-//                    }
-//                    return url
-//                })
-//
-//                let newPostDictionary = ["imageDownloadURL": imageDownloadURL, "Caption": captionTextView.text]
-//            }
-//        }
-//    }
-    
-    
-    
-    
-//    let ref = Database.database().reference()
-//    let usersReference = ref.child("users")
-//    let userID = user?.user.uid
-//    let newUserReference = usersReference.child(userID!)
-//    newUserReference.setValue(["username": username])
+
     
     
     
@@ -152,6 +120,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         self.captionTextView.text = ""
         self.photo.image = UIImage(named: "Placeholder-image")
         self.selectedImage = nil
+        self.shareButton.isEnabled = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -177,6 +146,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         // 'image' is the newly cropped version of the original image
         selectedImage = image
         photo.image = image
+        shareButton.isEnabled = true
         self.dismiss(animated: true, completion: nil)
         }    
 
