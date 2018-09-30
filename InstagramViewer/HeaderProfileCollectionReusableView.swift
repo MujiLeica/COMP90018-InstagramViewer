@@ -24,7 +24,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
             snapshot in
             if let dict = snapshot.value as? [String:Any]{
                 print("the code is in side this block 1")
-                let user = UserModel.transformUser(dict: dict)
+                let user = UserModel.transformUser(dict: dict, key: snapshot.key)
                 self.nameLabel.text = user.email
                 if let photoUrlString = user.profileImageUrl{
                     print("the code is in side this block 2")

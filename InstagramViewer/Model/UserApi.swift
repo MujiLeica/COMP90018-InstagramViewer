@@ -18,7 +18,7 @@ class UserApi {
         REF_USERS.queryOrdered(byChild: "username_lowercase").queryEqual(toValue: username).observeSingleEvent(of: .childAdded, with: {
             snapshot in
             if let dict = snapshot.value as? [String: Any] {
-                let user = UserModel.transformUser(dict: dict)
+                let user = UserModel.transformUser(dict: dict,key: snapshot.key)
                 completion(user)
             }
         })
@@ -29,7 +29,7 @@ class UserApi {
         REF_USERS.child(userId).observeSingleEvent(of: .value, with: {
             snapshot in
             if let dict = snapshot.value as? [String: Any] {
-                let user = UserModel.transformUser(dict: dict)
+                let user = UserModel.transformUser(dict: dict,key: snapshot.key)
                 completion(user)
             }
         })
@@ -43,7 +43,7 @@ class UserApi {
         REF_USERS.child(currentUser.uid).observeSingleEvent(of: .value, with: {
             snapshot in
             if let dict = snapshot.value as? [String: Any] {
-                let user = UserModel.transformUser(dict: dict)
+                let user = UserModel.transformUser(dict: dict,key: snapshot.key)
                 completion(user)
             }
         })
@@ -53,7 +53,7 @@ class UserApi {
         REF_USERS.observe(.childAdded, with: {
             snapshot in
             if let dict = snapshot.value as? [String: Any] {
-                let user = UserModel.transformUser(dict: dict)
+                let user = UserModel.transformUser(dict: dict,key: snapshot.key)
                 completion(user)
             }
         })
@@ -65,7 +65,7 @@ class UserApi {
             snapshot.children.forEach({ (s) in
                 let child = s as! DataSnapshot
                 if let dict = child.value as? [String: Any] {
-                    let user = UserModel.transformUser(dict: dict)
+                    let user = UserModel.transformUser(dict: dict,key: snapshot.key)
                     completion(user)
                 }
             })

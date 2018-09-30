@@ -13,18 +13,18 @@ class UserModel {
     var profileImageUrl: String?
     // var username: String?
     var id: String?
-    // var isFollowing: Bool?
+    var isFollowing: Bool?
     
     // static var blockList: [UserModel] = []
 }
 
 extension UserModel {
-    static func transformUser(dict: [String: Any]) -> UserModel {
+    static func transformUser(dict: [String: Any],key: String) -> UserModel {
         let user = UserModel()
         user.email = dict["username"] as? String
         user.profileImageUrl = dict["profileImageURL"] as? String
         // user.username = dict["username"] as? String
-        // user.id = key
+        user.id = key
         return user
     }
 }

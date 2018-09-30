@@ -19,11 +19,21 @@ class UserSuggestedViewController: UIViewController {
     
     func loadUser(){
         UserApi().observeUsers { (user) in
-            self.usersSeggested.append(user)
-            self.tableView.reloadData()
+            self.isFollowing(userId: user.id!, completed: {
+                (value) in
+                user.isFollowing = value
+                self.usersSeggested.append(user)
+                self.tableView.reloadData()
+            })
         }
     }
+    
+    func isFollowing(userId: String,completed: @escaping(Bool)->Void){
+        FollowApi().isFollowing(userId: userId, completed: completed)
+    }
 }
+
+
 
 extension UserSuggestedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

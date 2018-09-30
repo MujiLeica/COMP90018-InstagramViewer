@@ -24,6 +24,7 @@
 		63909A7321491423008C7E89 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63909A7221491423008C7E89 /* GoogleService-Info.plist */; };
 		63C892A9215395FA00889539 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C892A8215395FA00889539 /* CameraViewController.swift */; };
 		63D0B8D1215917FB0017BFC2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D0B8D0215917FB0017BFC2 /* ProfileViewController.swift */; };
+		6A01B3F02160AEAA00A852BB /* FollowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A01B3EF2160AEAA00A852BB /* FollowApi.swift */; };
 		6A19534C215E65A200B368D5 /* UserSuggestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A19534B215E65A200B368D5 /* UserSuggestedViewController.swift */; };
 		6A195350215E68F400B368D5 /* UserSuggestedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A19534F215E68F400B368D5 /* UserSuggestedCell.swift */; };
 		6A9846D1215A47BE00260677 /* HeaderProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9846D0215A47BE00260677 /* HeaderProfileCollectionReusableView.swift */; };
@@ -80,6 +81,7 @@
 		63909A7221491423008C7E89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		63C892A8215395FA00889539 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		63D0B8D0215917FB0017BFC2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6A01B3EF2160AEAA00A852BB /* FollowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowApi.swift; sourceTree = "<group>"; };
 		6A19534B215E65A200B368D5 /* UserSuggestedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSuggestedViewController.swift; sourceTree = "<group>"; };
 		6A19534F215E68F400B368D5 /* UserSuggestedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSuggestedCell.swift; sourceTree = "<group>"; };
 		6A9846D0215A47BE00260677 /* HeaderProfileCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -161,17 +163,17 @@
 			isa = PBXGroup;
 			children = (
 				637DF3862142D4AC00BF5C83 /* AppDelegate.swift */,
-				635D5970215A109E0098549E /* HomeTableViewCell.swift */,
 				631DC41221593E0800B72234 /* PostCell.swift */,
+				635D5970215A109E0098549E /* HomeTableViewCell.swift */,
+				6A19534F215E68F400B368D5 /* UserSuggestedCell.swift */,
+				6A9846D0215A47BE00260677 /* HeaderProfileCollectionReusableView.swift */,
 				637DF38F2142D4AD00BF5C83 /* Assets.xcassets */,
 				637DF38C2142D4AC00BF5C83 /* Main.storyboard */,
 				6A9846D8215B351700260677 /* Model */,
 				6A9846D6215B34D500260677 /* ViewController */,
-				6A9846D0215A47BE00260677 /* HeaderProfileCollectionReusableView.swift */,
 				63909A7221491423008C7E89 /* GoogleService-Info.plist */,
 				637DF3942142D4AD00BF5C83 /* Info.plist */,
 				637DF3912142D4AD00BF5C83 /* LaunchScreen.storyboard */,
-				6A19534F215E68F400B368D5 /* UserSuggestedCell.swift */,
 			);
 			path = InstagramViewer;
 			sourceTree = "<group>";
@@ -218,6 +220,7 @@
 				6A9846D9215B353800260677 /* User.swift */,
 				6A9846DB215B37C600260677 /* UserApi.swift */,
 				6A9846DD215B533800260677 /* UserPostApi.swift */,
+				6A01B3EF2160AEAA00A852BB /* FollowApi.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				63C892A9215395FA00889539 /* CameraViewController.swift in Sources */,
 				6A195350215E68F400B368D5 /* UserSuggestedCell.swift in Sources */,
 				637DF3B92142DCB600BF5C83 /* LoginPageViewController.swift in Sources */,
+				6A01B3F02160AEAA00A852BB /* FollowApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
