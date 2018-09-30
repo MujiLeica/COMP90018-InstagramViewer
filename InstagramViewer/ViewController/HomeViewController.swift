@@ -14,6 +14,8 @@ import SDWebImage
 class HomeViewController: UIViewController { 
     @IBOutlet weak var tableView: UITableView!
     var posts = [PostCell]()
+    let options = ["Sort by Time","Sort by Location"]
+    var sort: String?
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -22,6 +24,19 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         loadPosts()
     }
+    
+    
+    @IBAction func sortButton(_ sender: Any) {
+        sortOptionPicker()
+    }
+    
+    func sortOptionPicker() {
+        let sortOption = UIPickerView()
+        sortOption.delegate = self
+        sortOption.isHidden = false
+        //self.view.addSubview(sortOption)
+    }
+    
     
     func loadPosts() {
         // let userID = Auth.auth().currentUser?.uid
@@ -44,7 +59,6 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
-        //return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,4 +71,24 @@ extension HomeViewController: UITableViewDataSource {
 
         return cell
     }
+    
+}
+
+extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return options.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return options[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        sort = options[row]
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
 }
