@@ -21,56 +21,62 @@ class UserSuggestedCell: UITableViewCell {
             updateView()
         }
     }
-        
-    func updateView(){
+    func updateView() {
         nameLabel.text = user?.email
-        if let photoURLString = user?.profileImageUrl{
-            let photoURL = URL(string:photoURLString)
-            profileImg.sd_setImage(with: photoURL, placeholderImage:UIImage(named: "placeholderImg"))
+        if let photoUrlString = user?.profileImageUrl {
+            let photoUrl = URL(string: photoUrlString)
+            profileImg.sd_setImage(with: photoUrl, placeholderImage: UIImage(named: "placeholderImg"))
         }
         
-        // check whether the current user is following a specific user
-        if user!.isFollowing == true{
-            clickFollowBtn()
-        }else{
-            clickUnFollowBtn()
+        FollowApi().isFollowing(userId: user!.id!) { (value) in
+            if value  {
+                self.configureUnFollowButton()
+            } else {
+                self.configureFollowButton()
+            }
         }
+        
+        //        if user!.isFollowing! {
+        //            configureUnFollowButton()
+        //        } else {
+        //            configureFollowButton()
+        //        }
+        
     }
     
-    func clickFollowBtn(){
-        // set the style of the button
+    func configureFollowButton() {
         followBtn.layer.borderWidth = 1
-        followBtn.layer.borderColor = UIColor.gray.cgColor
+        followBtn.layer.borderColor = UIColor(red: 226/255, green: 228/255, blue: 232.255, alpha: 1).cgColor
         followBtn.layer.cornerRadius = 5
-        followBtn.layer.backgroundColor = UIColor.white.cgColor
-        followBtn.setTitleColor(UIColor.darkGray, for: UIControlState.normal)
-        //followBtn.clipsToBounds = true
-        self.followBtn.setTitle("Following", for: UIControlState.normal)
-        // when click the follow button, enable follow action
+        followBtn.clipsToBounds = true
+        
+        followBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        followBtn.backgroundColor = UIColor(red: 69/255, green: 142/255, blue: 255/255, alpha: 1)
+        followBtn.setTitle("Follow", for: UIControlState.normal)
         followBtn.addTarget(self, action: #selector(self.followAction), for: UIControlEvents.touchUpInside)
     }
-    func clickUnFollowBtn(){
+    
+    func configureUnFollowButton() {
         followBtn.layer.borderWidth = 1
+        followBtn.layer.borderColor = UIColor(red: 226/255, green: 228/255, blue: 232.255, alpha: 1).cgColor
         followBtn.layer.cornerRadius = 5
-        followBtn.layer.backgroundColor = UIColor(red: 60/255, green: 90/255, blue: 255/255, alpha: 1).cgColor
-        followBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-        //followBtn.clipsToBounds = true
+        followBtn.clipsToBounds = true
         
-        self.followBtn.setTitle("Follow", for: UIControlState.normal)
-        // when click the un-follow button, enable un-follow action
+        followBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
+        followBtn.backgroundColor = UIColor.clear
+        followBtn.setTitle("Following", for: UIControlState.normal)
         followBtn.addTarget(self, action: #selector(self.unFollowAction), for: UIControlEvents.touchUpInside)
     }
     
-    @objc func followAction(){
+    @objc func followAction() {
         FollowApi().followAction(withUser: user!.id!)
-        clickUnFollowBtn()
+        configureUnFollowButton()
     }
     
-    @objc func unFollowAction(){
+    @objc func unFollowAction() {
         FollowApi().unFollowAction(withUser: user!.id!)
-        clickFollowBtn()
+        configureFollowButton()
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -82,5 +88,5 @@ class UserSuggestedCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-        
+    
 }
