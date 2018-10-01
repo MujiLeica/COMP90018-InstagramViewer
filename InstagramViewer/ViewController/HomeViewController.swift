@@ -13,9 +13,13 @@ import SDWebImage
 
 class HomeViewController: UIViewController { 
     @IBOutlet weak var tableView: UITableView!
+    var postsId = [String]()
+    var postId:String?
     var posts = [PostCell]()
     let options = ["Sort by Time","Sort by Location"]
     var sort: String?
+    var RemovedPostUrl:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -39,19 +43,40 @@ class HomeViewController: UIViewController {
     
     
     func loadPosts() {
-        // let userID = Auth.auth().currentUser?.uid
-        Database.database().reference().child("posts").observe(.childAdded) { (snapshot) in
-            //print(snapshot.value!)
-            
+        let userID = Auth.auth().currentUser?.uid
+        
+        // executed once when initiating and then executed when a new child added to the user's feed
+        FeedApi().REF_FEED.child(userID!).observe(.childAdded) { (snapshot) in
+            let postId = snapshot.key
+            print(snapshot)
+            print(postId)
+            // grap the new post id and use it to fetch post info
+            self.loadPostView(postID: postId)
+        }
+        
+        // called when a child is removed from the user's feed
+        FeedApi().observeFeedRemoved(withId: userID!) { (key) in
+            self.posts = self.posts.filter { $0.PostCellId != key }
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+    // fetch the post info by using a given id
+    func loadPostView(postID: String){
+            Database.database().reference().child("posts").child(postID).observeSingleEvent(of: .value, with:{
+    snapshot in
             if let dict = snapshot.value as? [String: Any] {
-                print(snapshot)
                 let captionText = dict["Caption"] as! String
                 let postUrlString = dict["Path"] as! String
-                let post = PostCell(captionText: captionText, postUrl: postUrlString)
+                let post = PostCell(captionText: captionText, postUrl: postUrlString, CellId: snapshot.key)
                 self.posts.append(post)
                 self.tableView.reloadData()
+                print(snapshot)
+                return
             }
-        }
+            print(snapshot)
+        })
     }
 }
 

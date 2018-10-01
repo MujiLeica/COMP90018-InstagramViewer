@@ -35,13 +35,6 @@ class UserSuggestedCell: UITableViewCell {
                 self.configureFollowButton()
             }
         }
-        
-        //        if user!.isFollowing! {
-        //            configureUnFollowButton()
-        //        } else {
-        //            configureFollowButton()
-        //        }
-        
     }
     
     func configureFollowButton() {

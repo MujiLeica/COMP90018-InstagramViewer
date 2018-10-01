@@ -11,9 +11,11 @@ import Foundation
 class PostCell {
     var caption: String
     var path: String
+    var PostCellId: String
     
-    init(captionText: String, postUrl: String) {
+    init(captionText: String, postUrl: String, CellId: String) {
         caption = captionText
         path = postUrl
+        PostCellId = CellId
     }
 }

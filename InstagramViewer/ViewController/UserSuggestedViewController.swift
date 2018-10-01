@@ -28,12 +28,11 @@ class UserSuggestedViewController: UIViewController {
         }
     }
     
+    // check whether the target user is following the current user
     func isFollowing(userId: String,completed: @escaping(Bool)->Void){
         FollowApi().isFollowing(userId: userId, completed: completed)
     }
 }
-
-
 
 extension UserSuggestedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -63,10 +63,6 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         }
     }
     
-
-    
-    
-    
     @IBAction func shareButtonClicked(_ sender: Any) {
         //var postURL: String?
         if let imageData = UIImageJPEGRepresentation(self.selectedImage!, 0.05) {
@@ -78,20 +74,18 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                 }
                 print("Post Upload Success")
                 
-                //let path = uploadMetadata!.path
-                
-                
-                
-                
                 //push post data in database
                 let caption = self.captionTextView.text
-                // let currentUser = Auth.auth().currentUser?.uid
+                let currentUser = Auth.auth().currentUser?.uid
                 // put the posts to a new database tree
-                print("the data is not denied here")
                 let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("posts")
-                print("line 124")
                 let newPostId = DBref.childByAutoId().key
                 let newPostRef = DBref.child(newPostId)
+                
+                // then put the posts under "userPosts" child where includes this user's posts only
+                let UserPostRef = Database.database().reference().child("userPosts")
+                let UserNewPostRef = UserPostRef.child(currentUser!).child(newPostId)
+                UserNewPostRef.setValue(true)
                 
                 storageRef.downloadURL(completion: { (url, error) in
                     if error != nil {
@@ -100,9 +94,21 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                     else {
                         let postURL = url!.absoluteString
                         newPostRef.setValue(["Path": postURL, "Caption": caption])
+                        
+                        // update the "feed" database after successfully upload the image url to the storage
+                        FeedApi().REF_FEED.child(currentUser!).child(newPostId).setValue(true)
+                        
+                        // update the "feed" database under the current user's followers' node
+                        FollowApi().REF_FOLLOWERS.child(currentUser!).observeSingleEvent(of: .value, with: {
+                            snapshot in
+                            if let dict = snapshot.value as? [String: Any] {
+                                for key in dict.keys {
+                                    FeedApi().REF_FEED.child(key).child(newPostId).setValue(true)
+                                }
+                            }
+                        })
                     }
                 })
-                //DBref.setValue(["Path": path, "Caption": caption])
                 
                 self.clean()
                 self.tabBarController?.selectedIndex = 0

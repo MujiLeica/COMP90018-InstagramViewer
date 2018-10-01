@@ -17,11 +17,29 @@ class FollowApi{
     var currentUser = Auth.auth().currentUser!.uid
 
     func followAction(withUser id: String){
+        // if the current user starts to follow another user, fetch the another user's all post to the current user's feed
+        Database.database().reference().child("userPosts").child(id).observeSingleEvent(of: .value, with: {
+            snapshot in
+            if let dict = snapshot.value as? [String: Any] {
+                for key in dict.keys {
+                    Database.database().reference().child("feed").child(self.currentUser).child(key).setValue(true)
+                }
+            }
+        })
         REF_FOLLOWERS.child(id).child(currentUser).setValue(true)
         REF_FOLLOWING.child(currentUser).child(id).setValue(true)
     }
     
     func unFollowAction(withUser id: String){
+        Database.database().reference().child("userPosts").child(id).observeSingleEvent(of: .value, with: {
+            snapshot in
+            if let dict = snapshot.value as? [String: Any] {
+                for key in dict.keys {
+                    Database.database().reference().child("feed").child(self.currentUser).child(key).removeValue()
+                }
+            }
+        })
+        
         REF_FOLLOWERS.child(id).child(currentUser).setValue(NSNull())
         REF_FOLLOWING.child(currentUser).child(id).setValue(NSNull())
     }
