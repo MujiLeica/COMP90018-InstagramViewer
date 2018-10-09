@@ -69,7 +69,10 @@ class HomeViewController: UIViewController {
             if let dict = snapshot.value as? [String: Any] {
                 let captionText = dict["Caption"] as! String
                 let postUrlString = dict["Path"] as! String
-                let post = PostCell(captionText: captionText, postUrl: postUrlString, CellId: snapshot.key)
+                let latitude = dict["Latitude"] as! Double
+                let longitude = dict["Longitude"] as! Double
+                let timestamp = dict["Timestamp"] as! String
+                let post = PostCell(captionText: captionText, postUrl: postUrlString, Latitude: latitude, Longitude: longitude, Timestamp: timestamp, CellId: snapshot.key)
                 self.posts.append(post)
                 self.tableView.reloadData()
                 print(snapshot)
@@ -90,6 +93,7 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         let post = posts[indexPath.row]
         cell.captionLabel.text = post.caption
+        cell.timestampLabel.text = post.timestamp
         let postURLString = post.path
         let postURL = URL(string: postURLString)
         cell.postImageView.sd_setImage(with: postURL, completed: nil)

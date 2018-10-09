@@ -11,11 +11,17 @@ import Foundation
 class PostCell {
     var caption: String
     var path: String
+    var latitude: Double
+    var longitude: Double
+    var timestamp: String
     var PostCellId: String
     
-    init(captionText: String, postUrl: String, CellId: String) {
+    init(captionText: String, postUrl: String, Latitude: Double, Longitude: Double, Timestamp: String, CellId: String) {
         caption = captionText
         path = postUrl
+        latitude = Latitude
+        longitude = Longitude
+        timestamp = Timestamp
         PostCellId = CellId
     }
 }

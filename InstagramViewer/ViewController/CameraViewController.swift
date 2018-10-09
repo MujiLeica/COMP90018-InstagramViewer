@@ -20,8 +20,6 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     @IBOutlet weak var shareButton: UIButton!
     var selectedImage: UIImage?
     var textViewPlaceHolderMessage = "What's on your mind?"
-//    var latitude: CLLocationCoordinate2D
-//    var longitude: CLLocationCoordinate2D
     var latitude: Double?
     var longitude: Double?
     
@@ -46,11 +44,8 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let coordinates = location.coordinate
             latitude = location.coordinate.latitude
             longitude = location.coordinate.longitude
-            //print(coordinates)
-            print(latitude,longitude)
         }
     }
     
@@ -138,7 +133,8 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                     }
                     else {
                         let postURL = url!.absoluteString
-                        newPostRef.setValue(["Path": postURL, "Caption": caption])
+                        let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .long, timeStyle: .medium)
+                        newPostRef.setValue(["Path": postURL, "Caption": caption!, "Latitude": self.latitude!, "Longitude": self.longitude!, "Timestamp": timestamp])
                         
                         // update the "feed" database after successfully upload the image url to the storage
                         FeedApi().REF_FEED.child(currentUser!).child(newPostId).setValue(true)
