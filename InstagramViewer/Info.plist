@@ -48,6 +48,8 @@
 	<string>Because we need!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Because we need!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Using location for sorting posts</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
