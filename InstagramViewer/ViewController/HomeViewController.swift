@@ -10,34 +10,99 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import SDWebImage
+import CoreLocation
 
-class HomeViewController: UIViewController { 
+class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sortPicker: UIPickerView!
+    
     var postsId = [String]()
     var postId:String?
     var posts = [PostCell]()
     let options = ["Sort by Time","Sort by Location"]
     var sort: String?
-    var RemovedPostUrl:String!
+    var RemovedPostUrl: String!
+    
+
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
+        sortPicker.isHidden = true
         loadPosts()
     }
     
-    
-    @IBAction func sortButton(_ sender: Any) {
-        sortOptionPicker()
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let myCoordinates = location.coordinate
+            
+            //My location
+            let myLocation = CLLocation(latitude: 59.244696, longitude: 17.813868)
+            
+            //My buddy's location
+            let myBuddysLocation = CLLocation(latitude: 59.326354, longitude: 18.072310)
+            
+            //Measuring my distance to my buddy's (in km)
+            let distance = myLocation.distance(from: myBuddysLocation)
+            
+            print(distance)
+
+            
+        }
     }
     
-    func sortOptionPicker() {
-        let sortOption = UIPickerView()
-        sortOption.delegate = self
-        sortOption.isHidden = false
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == CLAuthorizationStatus.denied) {
+            showLocationDisabledPopUp()
+        }
+    }
+    
+    func showLocationDisabledPopUp() {
+        let alertController = UIAlertController(title: "Location Access Denied", message: "Need Location for Sorting Posts.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        alertController.addAction(openAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func sortPosts(_ sender: Any) {
+        createSortOptionPicker()
+        createToolbar()
+    }
+    
+    func createToolbar() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: nil)
+        toolbar.setItems([doneButton], animated: true)
+        toolbar.isUserInteractionEnabled = true
+        sortPicker.addSubview(toolbar)
+    }
+    
+    
+    func createSortOptionPicker() {
+        sortPicker.delegate = self
+        sortPicker.dataSource = self
+        sortPicker.backgroundColor = UIColor.yellow
+        sortPicker.isHidden = false
+        
         //self.view.addSubview(sortOption)
     }
     
@@ -121,3 +186,5 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
 }
+
+
