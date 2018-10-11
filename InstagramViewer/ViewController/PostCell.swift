@@ -13,15 +13,17 @@ class PostCell {
     var path: String
     var latitude: Double
     var longitude: Double
+    var distance: Double
     var timestamp: String
     var PostCellId: String
     
-    init(captionText: String, postUrl: String, Latitude: Double, Longitude: Double, Timestamp: String, CellId: String) {
+    init(captionText: String, postUrl: String, Latitude: Double, Longitude: Double, Timestamp: String, PostDistance: Double, CellId: String) {
         caption = captionText
         path = postUrl
         latitude = Latitude
         longitude = Longitude
         timestamp = Timestamp
+        distance = PostDistance
         PostCellId = CellId
     }
 }

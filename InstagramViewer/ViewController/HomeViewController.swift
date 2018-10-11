@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     let options = ["Sort by Time","Sort by Location"]
     var sort: String?
     var RemovedPostUrl: String!
+    var myLocation: CLLocation?
     
 
     let locationManager = CLLocationManager()
@@ -37,24 +38,31 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
+        sortPicker.delegate = self
+        sortPicker.dataSource = self
+        sortPicker.backgroundColor = UIColor.yellow
         sortPicker.isHidden = true
+        createToolbar()
         loadPosts()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let myCoordinates = location.coordinate
+            myLocation = location
+            print (myLocation)
+//            myLocation.distance(from: <#T##CLLocation#>)
             
-            //My location
-            let myLocation = CLLocation(latitude: 59.244696, longitude: 17.813868)
             
-            //My buddy's location
-            let myBuddysLocation = CLLocation(latitude: 59.326354, longitude: 18.072310)
+//            //My location
+//            let myLocation = CLLocation(latitude: 59.244696, longitude: 17.813868)
+//
+//            //My buddy's location
+//            let myBuddysLocation = CLLocation(latitude: 59.326354, longitude: 18.072310)
             
             //Measuring my distance to my buddy's (in km)
-            let distance = myLocation.distance(from: myBuddysLocation)
-            
-            print(distance)
+//            let distance = myLocation.distance(from: myBuddysLocation)
+//
+//            print(distance)
 
             
         }
@@ -84,23 +92,31 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func sortPosts(_ sender: Any) {
         createSortOptionPicker()
-        createToolbar()
+        //createToolbar()
     }
     
     func createToolbar() {
+        print("createToolbar")
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(HomeViewController.dismissPicker))
+
         toolbar.setItems([doneButton], animated: true)
         toolbar.isUserInteractionEnabled = true
         sortPicker.addSubview(toolbar)
     }
     
+    @objc func dismissPicker() {
+        print("dismiss Picker")
+        sortPicker.isHidden = true
+    }
+    
     
     func createSortOptionPicker() {
-        sortPicker.delegate = self
-        sortPicker.dataSource = self
-        sortPicker.backgroundColor = UIColor.yellow
+     
+//        sortPicker.delegate = self
+//        sortPicker.dataSource = self
+//        sortPicker.backgroundColor = UIColor.yellow
         sortPicker.isHidden = false
         
         //self.view.addSubview(sortOption)
@@ -134,10 +150,27 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             if let dict = snapshot.value as? [String: Any] {
                 let captionText = dict["Caption"] as! String
                 let postUrlString = dict["Path"] as! String
-                let latitude = dict["Latitude"] as! Double
-                let longitude = dict["Longitude"] as! Double
+                let postLatitude = dict["Latitude"] as! Double
+                let postLongitude = dict["Longitude"] as! Double
                 let timestamp = dict["Timestamp"] as! String
-                let post = PostCell(captionText: captionText, postUrl: postUrlString, Latitude: latitude, Longitude: longitude, Timestamp: timestamp, CellId: snapshot.key)
+                // let timeStamp = dict["Timestamp"] as! NSDate
+                
+                // print (timeStamp)
+                
+                let latitude: CLLocationDegrees = postLatitude
+                let longitude: CLLocationDegrees = -122.406500
+                
+                print(latitude, longitude)
+                
+                print (postLatitude, postLongitude)
+                //let postLocation = CLLocation(latitude: postLatitude, longitude: postLongitude)
+                let postLocation = CLLocation(latitude: latitude, longitude: longitude)
+                print ("Location:")
+                print (postLocation)
+                print (self.myLocation!)
+                let distance = self.myLocation!.distance(from: postLocation)
+                print (distance)
+                let post = PostCell(captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
                 self.posts.append(post)
                 self.tableView.reloadData()
                 print(snapshot)
@@ -158,7 +191,8 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         let post = posts[indexPath.row]
         cell.captionLabel.text = post.caption
-        cell.timestampLabel.text = post.timestamp
+        //cell.timestampLabel.text = post.timestamp
+        cell.timestampLabel.text = String(format: "%.2f", post.distance)
         let postURLString = post.path
         let postURL = URL(string: postURLString)
         cell.postImageView.sd_setImage(with: postURL, completed: nil)
