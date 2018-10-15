@@ -22,6 +22,8 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     var textViewPlaceHolderMessage = "What's on your mind?"
     var latitude: Double?
     var longitude: Double?
+//    var timestamp: NSDate!
+//    var timestampString: String!
     
     let locationManager = CLLocationManager()
 
@@ -40,6 +42,11 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
+
+//        self.timestamp = NSDate()
+//        let dateFormatter = DateFormatter()
+//        self.timestampString = dateFormatter.string(from: timestamp as Date)
+//        print("Camera View TimeStamp: " + timestampString)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -116,6 +123,8 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                 
                 //push post data in database
                 let caption = self.captionTextView.text
+                
+                
                 let currentUser = Auth.auth().currentUser?.uid
                 // put the posts to a new database tree
                 let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("posts")
@@ -133,7 +142,12 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                     }
                     else {
                         let postURL = url!.absoluteString
-                        let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .long, timeStyle: .medium)
+                        
+                       
+                        let timestamp = Int(Date().timeIntervalSince1970)
+                        print (timestamp)
+                        
+                        
                         newPostRef.setValue(["Path": postURL, "Caption": caption!, "Latitude": self.latitude!, "Longitude": self.longitude!, "Timestamp": timestamp])
                         
                         // update the "feed" database after successfully upload the image url to the storage

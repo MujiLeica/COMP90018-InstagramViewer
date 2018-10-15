@@ -112,10 +112,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let postUrlString = dict["Path"] as! String
                 let postLatitude = dict["Latitude"] as! Double
                 let postLongitude = dict["Longitude"] as! Double
-                let timestamp = dict["Timestamp"] as! String
+                let timestamp = dict["Timestamp"] as! Int
                 // let timeStamp = dict["Timestamp"] as! NSDate
                 
-                // print (timeStamp)
+                print (timestamp)
+                
+                
+                
+                
+                
                 
                 let latitude: CLLocationDegrees = postLatitude
                 let longitude: CLLocationDegrees = -122.406500
@@ -131,7 +136,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let distance = self.myLocation!.distance(from: postLocation)
                 print (distance)
                 let post = PostCell(captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
-                self.posts.append(post)
+                self.posts.insert(post, at: 0)
                 self.tableView.reloadData()
                 print(snapshot)
                 return
@@ -152,15 +157,44 @@ extension HomeViewController: UITableViewDataSource {
         let post = posts[indexPath.row]
         cell.captionLabel.text = post.caption
         //cell.timestampLabel.text = post.timestamp
-        cell.timestampLabel.text = String(format: "%.2f", post.distance)
+        //cell.timestampLabel.text = String(format: "%.2f", post.distance)
         let postURLString = post.path
         let postURL = URL(string: postURLString)
         cell.postImageView.sd_setImage(with: postURL, completed: nil)
+        
+        let timestamp = post.timestamp
+        
+        let timestampDate = Date(timeIntervalSince1970: Double(timestamp!))
+        let now = Date()
+        let componments = Set<Calendar.Component>([.second,.minute,.hour,.day,.weekOfMonth])
+        let diff = Calendar.current.dateComponents(componments, from: timestampDate, to: now)
+        var timeText = ""
+        if diff.second! <= 0 {
+            timeText = "Now"
+        }
+        if diff.second! > 0 && diff.minute! == 0 {
+            timeText = (diff.second == 1) ? "\(diff.second!) second ago" : "\(diff.second!) seconds ago"
+        }
+        if diff.minute! > 0 && diff.hour! == 0 {
+            timeText = (diff.minute == 1) ? "\(diff.minute!) minute ago" : "\(diff.minute!) minutes ago"
+        }
+        if diff.hour! > 0 && diff.day! == 0 {
+            timeText = (diff.hour == 1) ? "\(diff.hour!) hour ago" : "\(diff.hour!) hours ago"
+        }
+        if diff.day! > 0 && diff.weekOfMonth! == 0 {
+            timeText = (diff.day == 1) ? "\(diff.day!) day ago" : "\(diff.day!) days ago"
+        }
+        if diff.weekOfMonth! > 0 {
+            timeText = (diff.weekOfMonth == 1) ? "\(diff.weekOfMonth!) week ago" : "\(diff.weekOfMonth!) weeks ago"
+        }
+        
+        cell.timestampLabel.text = timeText
 
         return cell
     }
     
 }
+
 
 
 
