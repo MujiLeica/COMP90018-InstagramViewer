@@ -710,8 +710,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B5d-nL-haA"/>
                     </view>
-                    <navigationItem key="navigationItem" title="User Feed" id="0KX-CU-O9C"/>
+                    <navigationItem key="navigationItem" title="User Feed" id="0KX-CU-O9C">
+                        <barButtonItem key="rightBarButtonItem" title="SortByLocation" id="XzO-9L-vun">
+                            <connections>
+                                <action selector="SortFunction:" destination="zt5-F8-2Uu" id="ClE-tE-ZY9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="sortButton" destination="XzO-9L-vun" id="euF-i5-YKy"/>
                         <outlet property="tableView" destination="dyG-pk-I6A" id="bHZ-9b-o4q"/>
                     </connections>
                 </viewController>

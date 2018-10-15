@@ -14,12 +14,14 @@ import CoreLocation
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sortButton: UIBarButtonItem!
     
     var postsId = [String]()
     var postId:String?
     var posts = [PostCell]()
     var RemovedPostUrl: String!
     var myLocation: CLLocation?
+    var sortByTime = true
     
 
     let locationManager = CLLocationManager()
@@ -82,6 +84,24 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+    @IBAction func SortFunction(_ sender: Any) {
+        if self.sortByTime {
+            let newPosts = self.posts.sorted(by: {$0.distance < $1.distance})
+            print (newPosts)
+            sortButton.title = "SortByTime"
+            self.sortByTime = false
+        }
+        else {
+            let newPosts = posts
+            sortButton.title = "SortByLocation"
+            self.sortByTime = true
+            print (newPosts)
+        }
+        
+        
+    }
+    
+    
     
     func loadPosts() {
         let userID = Auth.auth().currentUser?.uid
@@ -113,17 +133,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let postLatitude = dict["Latitude"] as! Double
                 let postLongitude = dict["Longitude"] as! Double
                 let timestamp = dict["Timestamp"] as! Int
-                // let timeStamp = dict["Timestamp"] as! NSDate
-                
-                print (timestamp)
-                
-                
-                
-                
-                
-                
                 let latitude: CLLocationDegrees = postLatitude
-                let longitude: CLLocationDegrees = -122.406500
+                let longitude: CLLocationDegrees = postLongitude
+                //let longitude: CLLocationDegrees = -122.406500
+                
                 
                 print(latitude, longitude)
                 
@@ -136,6 +149,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let distance = self.myLocation!.distance(from: postLocation)
                 print (distance)
                 let post = PostCell(captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
+                
                 self.posts.insert(post, at: 0)
                 self.tableView.reloadData()
                 print(snapshot)
