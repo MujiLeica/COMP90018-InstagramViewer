@@ -700,35 +700,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQD-UN-3Uk">
-                                <rect key="frame" x="0.0" y="418" width="375" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="SkV-6d-9fu"/>
-                                </constraints>
-                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dyG-pk-I6A" firstAttribute="bottom" secondItem="B5d-nL-haA" secondAttribute="bottom" id="DJh-Yd-tKi"/>
-                            <constraint firstAttribute="bottom" secondItem="zQD-UN-3Uk" secondAttribute="bottom" id="DUR-1a-OYl"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="zQD-UN-3Uk" secondAttribute="bottom" id="GrZ-rP-xW1"/>
-                            <constraint firstItem="zQD-UN-3Uk" firstAttribute="trailing" secondItem="B5d-nL-haA" secondAttribute="trailing" id="JhU-b8-BbK"/>
                             <constraint firstItem="dyG-pk-I6A" firstAttribute="leading" secondItem="B5d-nL-haA" secondAttribute="leading" id="bdd-ZZ-6zL"/>
-                            <constraint firstItem="zQD-UN-3Uk" firstAttribute="leading" secondItem="B5d-nL-haA" secondAttribute="leading" id="qlR-xA-ZRL"/>
                             <constraint firstItem="dyG-pk-I6A" firstAttribute="trailing" secondItem="B5d-nL-haA" secondAttribute="trailing" id="uj6-RL-r0Q"/>
                             <constraint firstItem="dyG-pk-I6A" firstAttribute="top" secondItem="B5d-nL-haA" secondAttribute="top" id="yzX-9c-49H"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B5d-nL-haA"/>
                     </view>
-                    <navigationItem key="navigationItem" title="User Feed" id="0KX-CU-O9C">
-                        <barButtonItem key="rightBarButtonItem" title="Sort" id="XAI-fg-5Hb">
-                            <connections>
-                                <action selector="sortPosts:" destination="zt5-F8-2Uu" id="L8T-xd-9GK"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="User Feed" id="0KX-CU-O9C"/>
                     <connections>
-                        <outlet property="sortPicker" destination="zQD-UN-3Uk" id="e9B-VM-ZQp"/>
                         <outlet property="tableView" destination="dyG-pk-I6A" id="bHZ-9b-o4q"/>
                     </connections>
                 </viewController>

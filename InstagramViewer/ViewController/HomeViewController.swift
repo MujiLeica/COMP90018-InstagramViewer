@@ -14,13 +14,10 @@ import CoreLocation
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var sortPicker: UIPickerView!
     
     var postsId = [String]()
     var postId:String?
     var posts = [PostCell]()
-    let options = ["Sort by Time","Sort by Location"]
-    var sort: String?
     var RemovedPostUrl: String!
     var myLocation: CLLocation?
     
@@ -38,11 +35,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
-        sortPicker.delegate = self
-        sortPicker.dataSource = self
-        sortPicker.backgroundColor = UIColor.yellow
-        sortPicker.isHidden = true
-        createToolbar()
         loadPosts()
     }
     
@@ -89,38 +81,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    
-    @IBAction func sortPosts(_ sender: Any) {
-        createSortOptionPicker()
-        //createToolbar()
-    }
-    
-    func createToolbar() {
-        print("createToolbar")
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(HomeViewController.dismissPicker))
-
-        toolbar.setItems([doneButton], animated: true)
-        toolbar.isUserInteractionEnabled = true
-        sortPicker.addSubview(toolbar)
-    }
-    
-    @objc func dismissPicker() {
-        print("dismiss Picker")
-        sortPicker.isHidden = true
-    }
-    
-    
-    func createSortOptionPicker() {
-     
-//        sortPicker.delegate = self
-//        sortPicker.dataSource = self
-//        sortPicker.backgroundColor = UIColor.yellow
-        sortPicker.isHidden = false
-        
-        //self.view.addSubview(sortOption)
-    }
     
     
     func loadPosts() {
@@ -202,23 +162,5 @@ extension HomeViewController: UITableViewDataSource {
     
 }
 
-extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return options.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return options[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        sort = options[row]
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-}
 
 
