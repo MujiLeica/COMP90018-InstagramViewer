@@ -35,7 +35,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         }
         //tableView.estimatedRowHeight = 300
-        tableView.estimatedRowHeight = 400
+        tableView.estimatedRowHeight = 450
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         loadPosts()
