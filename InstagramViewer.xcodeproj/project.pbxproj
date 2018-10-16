@@ -164,6 +164,7 @@
 			children = (
 				637DF3862142D4AC00BF5C83 /* AppDelegate.swift */,
 				6A19534F215E68F400B368D5 /* UserSuggestedCell.swift */,
+				635D5970215A109E0098549E /* HomeTableViewCell.swift */,
 				6A9846D0215A47BE00260677 /* HeaderProfileCollectionReusableView.swift */,
 				637DF38F2142D4AD00BF5C83 /* Assets.xcassets */,
 				637DF38C2142D4AC00BF5C83 /* Main.storyboard */,
@@ -199,7 +200,6 @@
 			children = (
 				631DC4102159385400B72234 /* HomeViewController.swift */,
 				631DC41221593E0800B72234 /* PostCell.swift */,
-				635D5970215A109E0098549E /* HomeTableViewCell.swift */,
 				6300D43D21457268001CF5F0 /* CommentViewController.swift */,
 				637DF3B62142DC7100BF5C83 /* RegisterPageViewController.swift */,
 				637DF3B82142DCB600BF5C83 /* LoginPageViewController.swift */,
@@ -655,7 +655,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8VC87QRZ3C;
+				DEVELOPMENT_TEAM = Q7R73AQC9B;
 				INFOPLIST_FILE = InstagramViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -674,7 +674,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8VC87QRZ3C;
+				DEVELOPMENT_TEAM = Q7R73AQC9B;
 				INFOPLIST_FILE = InstagramViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

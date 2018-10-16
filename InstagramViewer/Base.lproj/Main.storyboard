@@ -819,6 +819,8 @@
                                             <outlet property="captionLabel" destination="EKB-4a-cSO" id="INu-Lp-Ksa"/>
                                             <outlet property="postImageView" destination="1ev-l7-Qis" id="JFX-Ho-fgU"/>
                                             <outlet property="timestampLabel" destination="nUa-iW-hA9" id="jO8-Me-Ls8"/>
+                                            <outlet property="userNameLabel" destination="jPn-Ur-iIv" id="2Vy-yH-P52"/>
+                                            <outlet property="userPhotoImgView" destination="hYV-jW-a9U" id="h1I-yK-4o7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var RemovedPostUrl: String!
     var myLocation: CLLocation?
     var sortByTime = true
+    var postUserId:String?
     
 
     let locationManager = CLLocationManager()
@@ -58,8 +59,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 //            let distance = myLocation.distance(from: myBuddysLocation)
 //
 //            print(distance)
-
-            
         }
     }
     
@@ -129,6 +128,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             Database.database().reference().child("posts").child(postID).observeSingleEvent(of: .value, with:{
     snapshot in
             if let dict = snapshot.value as? [String: Any] {
+                let userID = dict["UserID"] as! String
                 let captionText = dict["Caption"] as! String
                 let postUrlString = dict["Path"] as! String
                 let postLatitude = dict["Latitude"] as! Double
@@ -137,6 +137,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let latitude: CLLocationDegrees = postLatitude
                 let longitude: CLLocationDegrees = postLongitude
                 //let longitude: CLLocationDegrees = -122.406500
+                
+            
+                
+                
                 
                 
                 print(latitude, longitude)
@@ -149,7 +153,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 print (self.myLocation!)
                 let distance = self.myLocation!.distance(from: postLocation)
                 print (distance)
-                let post = PostCell(captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
+                let post = PostCell(UserID: userID, captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
+                
+                
                 
                 self.posts.insert(post, at: 0)
                 self.tableView.reloadData()
@@ -204,6 +210,25 @@ extension HomeViewController: UITableViewDataSource {
         }
         
         cell.timestampLabel.text = timeText
+        
+        
+        postUserId = post.userID
+        //UserApi().REF_CURRENT_USER?.observeSingleEvent(of: .value, with:{
+        UserApi().REF_USERS.child(postUserId!).observeSingleEvent(of: .value, with:{
+            snapshot in
+            if let dict = snapshot.value as? [String:Any]{
+                let user = UserModel.transformUser(dict: dict, key: snapshot.key)
+                cell.userNameLabel.text = user.username
+                if let photoUrlString = user.profileImageUrl{
+                    let photoUrl = URL(string: photoUrlString)
+                    cell.userPhotoImgView.sd_setImage(with: photoUrl)
+                    //self.profileImg.sd_setImage(with: photoUrl)
+                }
+            }
+        })
+        
+        
+        
 
         return cell
     }

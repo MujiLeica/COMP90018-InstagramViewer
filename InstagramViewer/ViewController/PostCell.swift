@@ -9,6 +9,7 @@
 import Foundation
 
 class PostCell {
+    var userID: String
     var caption: String
     var path: String
     var latitude: Double
@@ -17,7 +18,8 @@ class PostCell {
     var timestamp: Int?
     var PostCellId: String
     
-    init(captionText: String, postUrl: String, Latitude: Double, Longitude: Double, Timestamp: Int, PostDistance: Double, CellId: String) {
+    init(UserID: String, captionText: String, postUrl: String, Latitude: Double, Longitude: Double, Timestamp: Int, PostDistance: Double, CellId: String) {
+        userID = UserID
         caption = captionText
         path = postUrl
         latitude = Latitude

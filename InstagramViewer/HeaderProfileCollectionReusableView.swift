@@ -20,6 +20,8 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     
     // display the "header" info corespond to the current user
     func updateView(){
+        
+        
         UserApi().REF_CURRENT_USER?.observeSingleEvent(of: .value, with:{
             snapshot in
             if let dict = snapshot.value as? [String:Any]{
@@ -31,6 +33,9 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
                 }
             }
             })
+        
+        
+        
     }
 
 
