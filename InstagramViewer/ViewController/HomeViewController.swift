@@ -19,6 +19,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var postsId = [String]()
     var postId:String?
     var posts = [PostCell]()
+    var postsCopy = [PostCell]()
     var RemovedPostUrl: String!
     var myLocation: CLLocation?
     var sortByTime = true
@@ -85,17 +86,24 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func SortFunction(_ sender: Any) {
+        // if sortByTime == true: sort by location
         if self.sortByTime {
-            let newPosts = self.posts.sorted(by: {$0.distance < $1.distance})
-            print (newPosts)
+            self.postsCopy = self.posts
+            //let newPosts = self.posts.sorted(by: {$0.distance < $1.distance})
+            self.posts = self.posts.sorted(by: {$0.distance < $1.distance})
             sortButton.title = "SortByTime"
+            self.tableView.reloadData()
             self.sortByTime = false
         }
+            // if sortByLocation: sort by time
         else {
-            let newPosts = posts
+            //let newPosts = posts
+            self.posts = self.postsCopy
             sortButton.title = "SortByLocation"
+            self.tableView.reloadData()
             self.sortByTime = true
-            print (newPosts)
+            //print (newPosts)
+            
         }
         
         
@@ -193,19 +201,19 @@ extension HomeViewController: UITableViewDataSource {
         if diff.second! <= 0 {
             timeText = "Now"
         }
-        if diff.second! > 0 && diff.minute! == 0 {
+        else if diff.second! > 0 && diff.minute! == 0 {
             timeText = (diff.second == 1) ? "\(diff.second!) second ago" : "\(diff.second!) seconds ago"
         }
-        if diff.minute! > 0 && diff.hour! == 0 {
+        else if diff.minute! > 0 && diff.hour! == 0 {
             timeText = (diff.minute == 1) ? "\(diff.minute!) minute ago" : "\(diff.minute!) minutes ago"
         }
-        if diff.hour! > 0 && diff.day! == 0 {
+        else if diff.hour! > 0 && diff.day! == 0 {
             timeText = (diff.hour == 1) ? "\(diff.hour!) hour ago" : "\(diff.hour!) hours ago"
         }
-        if diff.day! > 0 && diff.weekOfMonth! == 0 {
+        else if diff.day! > 0 && diff.weekOfMonth! == 0 {
             timeText = (diff.day == 1) ? "\(diff.day!) day ago" : "\(diff.day!) days ago"
         }
-        if diff.weekOfMonth! > 0 {
+        else if diff.weekOfMonth! > 0 {
             timeText = (diff.weekOfMonth == 1) ? "\(diff.weekOfMonth!) week ago" : "\(diff.weekOfMonth!) weeks ago"
         }
         
@@ -226,9 +234,6 @@ extension HomeViewController: UITableViewDataSource {
                 }
             }
         })
-        
-        
-        
 
         return cell
     }
