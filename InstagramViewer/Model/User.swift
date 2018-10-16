@@ -11,7 +11,7 @@ import Foundation
 class UserModel {
     var email: String?
     var profileImageUrl: String?
-    // var username: String?
+    var username: String?
     var id: String?
     var isFollowing: Bool?
     
@@ -24,6 +24,7 @@ extension UserModel {
         user.email = dict["username"] as? String
         user.profileImageUrl = dict["profileImageURL"] as? String
         // user.username = dict["username"] as? String
+        user.username = user.email?.dropLast(10).lowercased()
         user.id = key
         return user
     }

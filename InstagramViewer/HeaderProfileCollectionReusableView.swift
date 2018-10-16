@@ -24,7 +24,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
             snapshot in
             if let dict = snapshot.value as? [String:Any]{
                 let user = UserModel.transformUser(dict: dict, key: snapshot.key)
-                self.nameLabel.text = user.email
+                self.nameLabel.text = user.username
                 if let photoUrlString = user.profileImageUrl{
                     let photoUrl = URL(string: photoUrlString)
                     self.profileImg.sd_setImage(with: photoUrl)
