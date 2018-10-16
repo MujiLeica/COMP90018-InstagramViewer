@@ -11,14 +11,21 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import CropViewController
+import CoreLocation
 
-class CameraViewController: UIViewController, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CameraViewController: UIViewController, CropViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var captionTextView: UITextView!
     @IBOutlet weak var shareButton: UIButton!
     var selectedImage: UIImage?
     var textViewPlaceHolderMessage = "What's on your mind?"
+    var latitude: Double?
+    var longitude: Double?
+//    var timestamp: NSDate!
+//    var timestampString: String!
+    
+    let locationManager = CLLocationManager()
 
     
     override func viewDidLoad() {
@@ -28,6 +35,46 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         photo.addGestureRecognizer(tapGesture)
         photo.isUserInteractionEnabled = true
         shareButton.isEnabled = false
+        
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+
+//        self.timestamp = NSDate()
+//        let dateFormatter = DateFormatter()
+//        self.timestampString = dateFormatter.string(from: timestamp as Date)
+//        print("Camera View TimeStamp: " + timestampString)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            latitude = location.coordinate.latitude
+            longitude = location.coordinate.longitude
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == CLAuthorizationStatus.denied) {
+            showLocationDisabledPopUp()
+        }
+    }
+    
+    func showLocationDisabledPopUp() {
+        let alertController = UIAlertController(title: "Location Access Denied", message: "Need Location for Sorting Posts.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        alertController.addAction(openAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 
     @objc func photoClick() {
@@ -76,6 +123,8 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                 
                 //push post data in database
                 let caption = self.captionTextView.text
+                
+                
                 let currentUser = Auth.auth().currentUser?.uid
                 // put the posts to a new database tree
                 let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("posts")
@@ -93,7 +142,13 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                     }
                     else {
                         let postURL = url!.absoluteString
-                        newPostRef.setValue(["Path": postURL, "Caption": caption])
+                        
+                       
+                        let timestamp = Int(Date().timeIntervalSince1970)
+                        print (timestamp)
+                        
+                        
+                        newPostRef.setValue(["Path": postURL, "Caption": caption!, "Latitude": self.latitude!, "Longitude": self.longitude!, "Timestamp": timestamp])
                         
                         // update the "feed" database after successfully upload the image url to the storage
                         FeedApi().REF_FEED.child(currentUser!).child(newPostId).setValue(true)
