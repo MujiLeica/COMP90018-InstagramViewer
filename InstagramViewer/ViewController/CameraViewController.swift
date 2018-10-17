@@ -27,7 +27,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        captionTextView.text = textViewPlaceHolderMessage
+        // captionTextView.text = textViewPlaceHolderMessage
         // add tapgesture to UIImageView
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoClick))
         photo.addGestureRecognizer(tapGesture)
@@ -191,7 +191,6 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
             filterVC.selectedImage = self.selectedImage
             filterVC.delegate = self
         }
-        
     }
     
     
