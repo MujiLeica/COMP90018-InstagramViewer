@@ -44,6 +44,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         loadPosts()
     }
     
+    
     //Get user location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
@@ -115,6 +116,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             self.tableView.reloadData()
         }
     }
+    
+    
+    @IBAction func button_touchUp(_ sender: Any) {
+        self.performSegue(withIdentifier: "commentSegue", sender: nil)      }
     
     // fetch the post info by using a given id
     func loadPostView(postID: String){
