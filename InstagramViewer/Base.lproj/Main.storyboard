@@ -454,6 +454,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="captionTextView" destination="BgT-4C-cQ2" id="d2X-BQ-wox"/>
+                        <outlet property="filterButton" destination="hKa-wZ-Ir1" id="p9u-pd-Ofi"/>
                         <outlet property="photo" destination="4R3-Pt-KjM" id="uml-cb-bJt"/>
                         <outlet property="shareButton" destination="Kwi-YJ-6PB" id="rpT-ub-Slp"/>
                         <segue destination="Fjg-cJ-qrh" kind="presentation" identifier="filter_segue" id="aSj-Kj-SrH"/>
