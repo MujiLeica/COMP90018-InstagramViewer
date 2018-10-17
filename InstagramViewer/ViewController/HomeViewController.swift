@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var postsId = [String]()
     var postId:String?
     var posts = [PostCell]()
-    var postsCopy = [PostCell]()
+    //var postsCopy = [PostCell]()
     var RemovedPostUrl: String!
     var myLocation: CLLocation?
     var sortByTime = true
@@ -46,20 +46,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             myLocation = location
-            print (myLocation)
-//            myLocation.distance(from: <#T##CLLocation#>)
-            
-            
-//            //My location
-//            let myLocation = CLLocation(latitude: 59.244696, longitude: 17.813868)
-//
-//            //My buddy's location
-//            let myBuddysLocation = CLLocation(latitude: 59.326354, longitude: 18.072310)
-            
-            //Measuring my distance to my buddy's (in km)
-//            let distance = myLocation.distance(from: myBuddysLocation)
-//
-//            print(distance)
+            print ("My Location: ")
+            print (myLocation!)
         }
     }
     
@@ -88,21 +76,26 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func SortFunction(_ sender: Any) {
         // if sortByTime == true: sort by location
         if self.sortByTime {
-            self.postsCopy = self.posts
+            //self.postsCopy = self.posts
             //let newPosts = self.posts.sorted(by: {$0.distance < $1.distance})
             self.posts = self.posts.sorted(by: {$0.distance < $1.distance})
             sortButton.title = "SortByTime"
             self.tableView.reloadData()
+            //print("Sort by Location")
             self.sortByTime = false
+            print(self.posts[1].distance)
         }
             // if sortByLocation: sort by time
         else {
             //let newPosts = posts
-            self.posts = self.postsCopy
+            //self.posts = self.postsCopy
+            self.posts = self.posts.sorted(by: {$0.distance > $1.distance})
             sortButton.title = "SortByLocation"
             self.tableView.reloadData()
+            //print("Sort by Time")
             self.sortByTime = true
             //print (newPosts)
+            print(self.posts[1].distance)
             
         }
         
@@ -118,7 +111,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         FeedApi().REF_FEED.child(userID!).observe(.childAdded) { (snapshot) in
             let postId = snapshot.key
             print(snapshot)
-            print(postId)
+            //print(postId)
             // grap the new post id and use it to fetch post info
             self.loadPostView(postID: postId)
         }
@@ -146,13 +139,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let longitude: CLLocationDegrees = postLongitude
                 //let longitude: CLLocationDegrees = -122.406500
                 
-            
-                
-                
-                
-                
                 print(latitude, longitude)
-                
                 print (postLatitude, postLongitude)
                 //let postLocation = CLLocation(latitude: postLatitude, longitude: postLongitude)
                 let postLocation = CLLocation(latitude: latitude, longitude: longitude)
@@ -160,10 +147,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 print (postLocation)
                 print (self.myLocation!)
                 let distance = self.myLocation!.distance(from: postLocation)
-                print (distance)
+                print ("post distance: " + String(distance))
                 let post = PostCell(UserID: userID, captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
-                
-                
+                print("Post Distance: ")
+                print(post.distance)
                 
                 self.posts.insert(post, at: 0)
                 self.tableView.reloadData()
