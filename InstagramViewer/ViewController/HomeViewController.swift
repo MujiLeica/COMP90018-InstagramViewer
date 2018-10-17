@@ -19,7 +19,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var postsId = [String]()
     var postId:String?
     var posts = [PostCell]()
-    //var postsCopy = [PostCell]()
     var RemovedPostUrl: String!
     var myLocation: CLLocation?
     var sortByTime = true
@@ -30,12 +29,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Request location permission from user
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
+        //Load posts into table view
         //tableView.estimatedRowHeight = 300
         tableView.estimatedRowHeight = 450
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -43,6 +44,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         loadPosts()
     }
     
+    //Get user location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             myLocation = location
@@ -51,6 +53,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    //Show setting pop ups if user denied our location permission request
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.denied) {
             showLocationDisabledPopUp()
@@ -72,41 +75,32 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    
+    //Sort posts by location and time
     @IBAction func SortFunction(_ sender: Any) {
+        // By default, posts are sorted by time in reverse order
         // if sortByTime == true: sort by location
         if self.sortByTime {
-            //self.postsCopy = self.posts
-            //let newPosts = self.posts.sorted(by: {$0.distance < $1.distance})
+            // sort posts by distance in ascending order
             self.posts = self.posts.sorted(by: {$0.distance < $1.distance})
+            // change the button name to SortByTime
             sortButton.title = "SortByTime"
+            // reload table view and flip the flag variable
             self.tableView.reloadData()
-            //print("Sort by Location")
             self.sortByTime = false
-            print(self.posts[1].distance)
         }
-            // if sortByLocation: sort by time
+        // if sortByTime == false: sort by time
         else {
-            //let newPosts = posts
-            //self.posts = self.postsCopy
-            self.posts = self.posts.sorted(by: {$0.distance > $1.distance})
+            // sort posts by timestamp; change button name and flip flag variable
+            self.posts = self.posts.sorted(by: {$0.timestamp! > $1.timestamp!})
             sortButton.title = "SortByLocation"
             self.tableView.reloadData()
-            //print("Sort by Time")
             self.sortByTime = true
-            //print (newPosts)
-            print(self.posts[1].distance)
-            
         }
-        
-        
     }
     
-    
-    
+    //Load posts from firebase
     func loadPosts() {
         let userID = Auth.auth().currentUser?.uid
-        
         // executed once when initiating and then executed when a new child added to the user's feed
         FeedApi().REF_FEED.child(userID!).observe(.childAdded) { (snapshot) in
             let postId = snapshot.key
@@ -115,18 +109,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             // grap the new post id and use it to fetch post info
             self.loadPostView(postID: postId)
         }
-        
         // called when a child is removed from the user's feed
         FeedApi().observeFeedRemoved(withId: userID!) { (key) in
             self.posts = self.posts.filter { $0.PostCellId != key }
             self.tableView.reloadData()
         }
-        
     }
     
     // fetch the post info by using a given id
     func loadPostView(postID: String){
-            Database.database().reference().child("posts").child(postID).observeSingleEvent(of: .value, with:{
+        Database.database().reference().child("posts").child(postID).observeSingleEvent(of: .value, with:{
     snapshot in
             if let dict = snapshot.value as? [String: Any] {
                 let userID = dict["UserID"] as! String
@@ -137,49 +129,49 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let timestamp = dict["Timestamp"] as! Int
                 let latitude: CLLocationDegrees = postLatitude
                 let longitude: CLLocationDegrees = postLongitude
-                //let longitude: CLLocationDegrees = -122.406500
                 
-                print(latitude, longitude)
-                print (postLatitude, postLongitude)
+                //print(latitude, longitude)
+                //print (postLatitude, postLongitude)
                 //let postLocation = CLLocation(latitude: postLatitude, longitude: postLongitude)
+                
+                // load post location into CLLocation
                 let postLocation = CLLocation(latitude: latitude, longitude: longitude)
-                print ("Location:")
+                print ("Post Location:")
                 print (postLocation)
                 print (self.myLocation!)
+                // calculate the distance between user location and post location
                 let distance = self.myLocation!.distance(from: postLocation)
-                print ("post distance: " + String(distance))
                 let post = PostCell(UserID: userID, captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
                 print("Post Distance: ")
                 print(post.distance)
-                
                 self.posts.insert(post, at: 0)
                 self.tableView.reloadData()
                 print(snapshot)
                 return
             }
-            print(snapshot)
+            //print(snapshot)
         })
     }
 }
 
-
+// extension for table view
 extension HomeViewController: UITableViewDataSource {
+    // return the number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
     
+    // load data in posts array to table view cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! HomeTableViewCell
         let post = posts[indexPath.row]
         cell.captionLabel.text = post.caption
-        //cell.timestampLabel.text = post.timestamp
-        //cell.timestampLabel.text = String(format: "%.2f", post.distance)
         let postURLString = post.path
         let postURL = URL(string: postURLString)
         cell.postImageView.sd_setImage(with: postURL, completed: nil)
         
+        // workout the time difference between posts and current time
         let timestamp = post.timestamp
-        
         let timestampDate = Date(timeIntervalSince1970: Double(timestamp!))
         let now = Date()
         let componments = Set<Calendar.Component>([.second,.minute,.hour,.day,.weekOfMonth])
@@ -206,9 +198,8 @@ extension HomeViewController: UITableViewDataSource {
         
         cell.timestampLabel.text = timeText
         
-        
+        // load user name and profile image
         postUserId = post.userID
-        //UserApi().REF_CURRENT_USER?.observeSingleEvent(of: .value, with:{
         UserApi().REF_USERS.child(postUserId!).observeSingleEvent(of: .value, with:{
             snapshot in
             if let dict = snapshot.value as? [String:Any]{
