@@ -2,7 +2,7 @@
 //  FilterViewController.swift
 //  InstagramViewer
 //
-//  Created by Huiqun Chen on 26/9/18.
+//  Created by Yushan Wang on 26/9/18.
 //  Copyright © 2018 CHONG LIU. All rights reserved.
 //
 

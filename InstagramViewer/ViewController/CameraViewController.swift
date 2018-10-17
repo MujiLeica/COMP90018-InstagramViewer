@@ -22,31 +22,26 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     var textViewPlaceHolderMessage = "What's on your mind?"
     var latitude: Double?
     var longitude: Double?
-//    var timestamp: NSDate!
-//    var timestampString: String!
-    
+    @IBOutlet weak var filterButton: UIButton!
     let locationManager = CLLocationManager()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        captionTextView.text = textViewPlaceHolderMessage
+        // captionTextView.text = textViewPlaceHolderMessage
+        // add tapgesture to UIImageView
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoClick))
         photo.addGestureRecognizer(tapGesture)
         photo.isUserInteractionEnabled = true
         shareButton.isEnabled = false
+        filterButton.isEnabled = false
         
+        // get user location when posting photos
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
-
-//        self.timestamp = NSDate()
-//        let dateFormatter = DateFormatter()
-//        self.timestampString = dateFormatter.string(from: timestamp as Date)
-//        print("Camera View TimeStamp: " + timestampString)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -56,6 +51,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         }
     }
     
+    // show disable pop ups
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.denied) {
             showLocationDisabledPopUp()
@@ -77,6 +73,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         self.present(alertController, animated: true, completion: nil)
     }
 
+    // show ImagePickerController to select photo library or camera
     @objc func photoClick() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -103,13 +100,14 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     }
     
     
-    
+    // crop image function
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage{
             presentCropViewController(input: image)
         }
     }
     
+    // share photo
     @IBAction func shareButtonClicked(_ sender: Any) {
         //var postURL: String?
         if let imageData = UIImageJPEGRepresentation(self.selectedImage!, 0.05) {
@@ -172,16 +170,19 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         }
     }
     
+    // reset camera view to blank
     @IBAction func cancelButton(_ sender: Any) {
         self.clean()
         self.tabBarController?.selectedIndex = 0
     }
     
+    // clean function
     func clean() {
         self.captionTextView.text = ""
         self.photo.image = UIImage(named: "Placeholder-image")
         self.selectedImage = nil
         self.shareButton.isEnabled = false
+        self.filterButton.isEnabled = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -190,7 +191,6 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
             filterVC.selectedImage = self.selectedImage
             filterVC.delegate = self
         }
-        
     }
     
     
@@ -208,6 +208,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         selectedImage = image
         photo.image = image
         shareButton.isEnabled = true
+        filterButton.isEnabled = true
         self.dismiss(animated: true, completion: nil)
         }    
 
@@ -215,6 +216,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
         self.performSegue(withIdentifier: "filter_segue", sender: nil)
         }
     
+    // present view to the top
     func topMostController() -> UIViewController {
         var topController: UIViewController = UIApplication.shared.keyWindow!.rootViewController!
         while (topController.presentedViewController != nil) {
