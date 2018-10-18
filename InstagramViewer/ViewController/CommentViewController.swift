@@ -22,17 +22,40 @@ class CommentViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var bottonConstrain: NSLayoutConstraint!
+    
+    @IBOutlet weak var bottomConstrain: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
+        empty()
+        handleTextField()
         loadComments()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)        }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        print(notification)
+        let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+        UIView.animate(withDuration: 0.4) {
+            self.bottomConstrain.constant = keyboardFrame!.height
+            self.view.layoutIfNeeded()
+            
         }
-    
-   
-    
+    }
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        UIView.animate(withDuration: 0.4) {
+            self.bottomConstrain.constant = 0
+            self.view.layoutIfNeeded()
+            
+        }
+    }
     func loadComments()
     {
         let postCommentRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("post-comments").child(self.postID)
@@ -64,8 +87,19 @@ class CommentViewController: UIViewController {
         })
     }
     
+    func handleTextField() {
+        commentTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+    }
     
-    
+    @objc func textFieldDidChange() {
+        if let commentText = commentTextField.text, !commentText.isEmpty {
+            sendButtonControl.setTitleColor(UIColor.blue, for: UIControlState.normal)
+            sendButtonControl.isEnabled = true
+            return
+        }
+        sendButtonControl.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
+        sendButtonControl.isEnabled = false
+    }
     
     
     @IBAction func sendButton(_ sender: Any) {
@@ -77,7 +111,17 @@ class CommentViewController: UIViewController {
             newCommentReference.setValue(["UserID":  currentUser!, "CommentText": commentTextField.text!])
             let postCommentRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("post-comments").child(self.postID).child(commentID)
             postCommentRef.setValue(true)
+            self.empty()
+            self.view.endEditing(true)
+        
     }
+    func empty() {
+        self.commentTextField.text = ""
+        self.sendButtonControl.isEnabled = false
+        sendButtonControl.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
+    }
+    
+    
 }
 
 extension CommentViewController: UITableViewDataSource {
