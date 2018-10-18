@@ -28,6 +28,11 @@ class FollowApi{
         })
         REF_FOLLOWERS.child(id).child(currentUser).setValue(true)
         REF_FOLLOWING.child(currentUser).child(id).setValue(true)
+        
+        let timestamp = NSNumber(value: Int(Date().timeIntervalSince1970))
+        
+        let newNotificationReference = NotificationApi().REF_NOTIFICATION.child(id).child("\(id)-\(currentUser)")
+        newNotificationReference.setValue(["from": currentUser, "objectId": currentUser, "type": "follow", "timestamp": timestamp])
     }
     
     func unFollowAction(withUser id: String){

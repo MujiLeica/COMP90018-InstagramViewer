@@ -94,11 +94,7 @@ class RegisterPageViewController: UIViewController {
                             })
                         })
                     }
-                
-
-                
-            
-            
+             
             }
                 else {
                     self.displayAlertMessage(alertMessage: "Error: \(String(describing: error?.localizedDescription))")

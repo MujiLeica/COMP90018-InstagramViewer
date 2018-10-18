@@ -156,6 +156,22 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                         // update the "feed" database after successfully upload the image url to the storage
                         FeedApi().REF_FEED.child(currentUser!).child(newPostId).setValue(true)
                         
+                        // for activity
+                        FollowApi().REF_FOLLOWERS.child(currentUser!).observeSingleEvent(of: .value, with: {
+                            snapshot in
+                            let arraySnapshot = snapshot.children.allObjects as! [DataSnapshot]
+                            
+                            arraySnapshot.forEach({ (child) in
+                                print(child.key)
+                                // update the user's followers' feed 
+                                FeedApi().REF_FEED.child(child.key).updateChildValues(["\(newPostId)":true])
+                                // push the activity to every followers
+                                let newNotificationId = NotificationApi().REF_NOTIFICATION.child(child.key).childByAutoId().key
+                                let newNotificationReference = NotificationApi().REF_NOTIFICATION.child(child.key).child(newNotificationId)
+                                newNotificationReference.setValue(["from":currentUser,"type":"feed", "objectId":newPostId, "timestamp":timestamp])
+                            })
+                        })
+                        
                         // update the "feed" database under the current user's followers' node
                         FollowApi().REF_FOLLOWERS.child(currentUser!).observeSingleEvent(of: .value, with: {
                             snapshot in
