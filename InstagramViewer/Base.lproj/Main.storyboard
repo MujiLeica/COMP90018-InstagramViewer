@@ -931,8 +931,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQ2-L0-Tsb">
-                                <rect key="frame" x="0.0" y="539" width="375" height="79"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQ2-L0-Tsb">
+                                <rect key="frame" x="0.0" y="490" width="375" height="128"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8EG-0s-4az">
                                         <rect key="frame" x="0.0" y="20" width="300" height="30"/>
@@ -1023,10 +1023,12 @@
                             <constraint firstItem="GQ2-L0-Tsb" firstAttribute="leading" secondItem="tLF-rS-Y8W" secondAttribute="leading" id="XeW-aK-ZbN"/>
                             <constraint firstItem="tLF-rS-Y8W" firstAttribute="bottom" secondItem="jcx-Z8-WcX" secondAttribute="bottom" id="epU-aH-Uts"/>
                             <constraint firstItem="jcx-Z8-WcX" firstAttribute="top" secondItem="IFn-eQ-usY" secondAttribute="top" id="uRj-uH-wWd"/>
+                            <constraint firstItem="GQ2-L0-Tsb" firstAttribute="bottom" secondItem="tLF-rS-Y8W" secondAttribute="bottom" id="vyQ-xZ-nGr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tLF-rS-Y8W"/>
                     </view>
                     <connections>
+                        <outlet property="bottonConstrain" destination="B6X-4x-rCs" id="ajZ-K5-uao"/>
                         <outlet property="commentTextField" destination="8EG-0s-4az" id="Jx0-DY-a0r"/>
                         <outlet property="sendButtonControl" destination="zZR-y5-bIF" id="szu-i2-Dxs"/>
                     </connections>

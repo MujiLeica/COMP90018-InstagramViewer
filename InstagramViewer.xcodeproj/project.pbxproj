@@ -38,6 +38,7 @@
 		EB43C1A1215B53C000E78812 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB43C1A0215B53C000E78812 /* FilterViewController.swift */; };
 		EB47B3F421776A8C00C14008 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47B3F321776A8C00C14008 /* CommentViewController.swift */; };
 		EB47B3F621776B9200C14008 /* CommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47B3F521776B9200C14008 /* CommentTableViewController.swift */; };
+		EB47B3F8217858E000C14008 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47B3F7217858E000C14008 /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		EB43C1A0215B53C000E78812 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		EB47B3F321776A8C00C14008 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		EB47B3F521776B9200C14008 /* CommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewController.swift; sourceTree = "<group>"; };
+		EB47B3F7217858E000C14008 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F4CA619A43B4F3082A88A39E /* Pods_InstagramViewerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramViewerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -227,6 +229,7 @@
 				6A9846DB215B37C600260677 /* UserApi.swift */,
 				6A01B3EF2160AEAA00A852BB /* FollowApi.swift */,
 				6A1582142161D25A00CBDFB6 /* FeedApi.swift */,
+				EB47B3F7217858E000C14008 /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A9846DA215B353800260677 /* User.swift in Sources */,
+				EB47B3F8217858E000C14008 /* Comment.swift in Sources */,
 				637DF3B72142DC7100BF5C83 /* RegisterPageViewController.swift in Sources */,
 				637DF38B2142D4AC00BF5C83 /* SecondViewController.swift in Sources */,
 				6A9846D1215A47BE00260677 /* HeaderProfileCollectionReusableView.swift in Sources */,
