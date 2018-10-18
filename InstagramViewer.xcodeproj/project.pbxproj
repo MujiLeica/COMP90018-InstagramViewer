@@ -32,6 +32,10 @@
 		6A9846D3215A649B00260677 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9846D2215A649B00260677 /* DiscoverViewController.swift */; };
 		6A9846DA215B353800260677 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9846D9215B353800260677 /* User.swift */; };
 		6A9846DC215B37C600260677 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9846DB215B37C600260677 /* UserApi.swift */; };
+		6A9CDE832178A19100E62E0F /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDE822178A19100E62E0F /* ActivityViewController.swift */; };
+		6A9CDE852178A1D600E62E0F /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDE842178A1D600E62E0F /* ActivityTableViewCell.swift */; };
+		6A9CDE872178AA7B00E62E0F /* NotificationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDE862178AA7B00E62E0F /* NotificationApi.swift */; };
+		6A9CDE892178AC7200E62E0F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDE882178AC7200E62E0F /* Notification.swift */; };
 		815DCB70E7346750A61D968A /* Pods_InstagramViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CA619A43B4F3082A88A39E /* Pods_InstagramViewerTests.framework */; };
 		D53D3A1367A7BE96CDFFBBEF /* Pods_InstagramViewerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C297ED5188A654A2D85B4DD9 /* Pods_InstagramViewerUITests.framework */; };
 		EB43C19F215B535D00E78812 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB43C19E215B535D00E78812 /* FilterCollectionViewCell.swift */; };
@@ -92,6 +96,10 @@
 		6A9846D2215A649B00260677 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		6A9846D9215B353800260677 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6A9846DB215B37C600260677 /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
+		6A9CDE822178A19100E62E0F /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		6A9CDE842178A1D600E62E0F /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		6A9CDE862178AA7B00E62E0F /* NotificationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationApi.swift; sourceTree = "<group>"; };
+		6A9CDE882178AC7200E62E0F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		6EC0E1D3B09AB3A2C284D692 /* Pods-InstagramViewerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramViewerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramViewerTests/Pods-InstagramViewerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B20B918ACAEA86F9A7A41CE9 /* Pods-InstagramViewerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramViewerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramViewerTests/Pods-InstagramViewerTests.release.xcconfig"; sourceTree = "<group>"; };
 		BF3CE568D307ACC14984948C /* Pods-InstagramViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramViewer/Pods-InstagramViewer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +180,7 @@
 				6A19534F215E68F400B368D5 /* UserSuggestedCell.swift */,
 				635D5970215A109E0098549E /* HomeTableViewCell.swift */,
 				6A9846D0215A47BE00260677 /* HeaderProfileCollectionReusableView.swift */,
+				6A9CDE842178A1D600E62E0F /* ActivityTableViewCell.swift */,
 				637DF38F2142D4AD00BF5C83 /* Assets.xcassets */,
 				637DF38C2142D4AC00BF5C83 /* Main.storyboard */,
 				6A9846D8215B351700260677 /* Model */,
@@ -218,6 +227,7 @@
 				6A19534B215E65A200B368D5 /* UserSuggestedViewController.swift */,
 				63E12B352176E79000540430 /* EditProfileViewController.swift */,
 				EB47B3F321776A8C00C14008 /* CommentViewController.swift */,
+				6A9CDE822178A19100E62E0F /* ActivityViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -230,6 +240,8 @@
 				6A01B3EF2160AEAA00A852BB /* FollowApi.swift */,
 				6A1582142161D25A00CBDFB6 /* FeedApi.swift */,
 				EB47B3F7217858E000C14008 /* Comment.swift */,
+				6A9CDE862178AA7B00E62E0F /* NotificationApi.swift */,
+				6A9CDE882178AC7200E62E0F /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -489,10 +501,14 @@
 				637DF3872142D4AC00BF5C83 /* AppDelegate.swift in Sources */,
 				6A9846D3215A649B00260677 /* DiscoverViewController.swift in Sources */,
 				63C892A9215395FA00889539 /* CameraViewController.swift in Sources */,
+				6A9CDE832178A19100E62E0F /* ActivityViewController.swift in Sources */,
+				6A9CDE892178AC7200E62E0F /* Notification.swift in Sources */,
 				6A195350215E68F400B368D5 /* UserSuggestedCell.swift in Sources */,
 				637DF3B92142DCB600BF5C83 /* LoginPageViewController.swift in Sources */,
+				6A9CDE852178A1D600E62E0F /* ActivityTableViewCell.swift in Sources */,
 				6A01B3F02160AEAA00A852BB /* FollowApi.swift in Sources */,
 				63E12B362176E79000540430 /* EditProfileViewController.swift in Sources */,
+				6A9CDE872178AA7B00E62E0F /* NotificationApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,7 +683,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8VC87QRZ3C;
+				DEVELOPMENT_TEAM = Q7R73AQC9B;
 				INFOPLIST_FILE = InstagramViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -686,7 +702,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8VC87QRZ3C;
+				DEVELOPMENT_TEAM = Q7R73AQC9B;
 				INFOPLIST_FILE = InstagramViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
