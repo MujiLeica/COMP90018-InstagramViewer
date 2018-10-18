@@ -28,8 +28,6 @@ class CommentViewController: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
-        sendButtonControl.isEnabled = false
-        handleTextField()
         loadComments()
         }
     
@@ -46,7 +44,7 @@ class CommentViewController: UIViewController {
                 snapshotComments in
                 if let dict = snapshotComments.value as? [String: Any] {
                     let newComment = Comment.transformComment(dict: dict)
-                    self.fetchUser(uid: newComment.uid!, completed: {
+                    self.getUser(uid: newComment.uid!, completed: {
                         self.comments.append(newComment)
                         self.tableView.reloadData()
                     })
@@ -55,7 +53,7 @@ class CommentViewController: UIViewController {
         })
     }
     
-    func fetchUser(uid: String, completed:  @escaping () -> Void ) {
+    func getUser(uid: String, completed:  @escaping () -> Void ) {
         Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("users").child(uid).observeSingleEvent(of: DataEventType.value, with: {
             snapshot in
             if let dict = snapshot.value as? [String: Any] {
@@ -69,21 +67,6 @@ class CommentViewController: UIViewController {
     
     
     
-    func handleTextField() {
-        commentTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
-    }
-    
-    @objc func textFieldDidChange() {
-        if let commentText = commentTextField.text, !commentText.isEmpty {
-            sendButtonControl.setTitleColor(UIColor.blue, for: UIControlState.normal)
-            sendButtonControl.isEnabled = true
-            return
-        }
-        sendButtonControl.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
-        sendButtonControl.isEnabled = false
-    }
-    
-    
     
     @IBAction func sendButton(_ sender: Any) {
             let dbRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/")
@@ -92,7 +75,7 @@ class CommentViewController: UIViewController {
             let newCommentReference = commentReference.child(commentID)
             let currentUser = Auth.auth().currentUser?.uid
             newCommentReference.setValue(["UserID":  currentUser!, "CommentText": commentTextField.text!])
-            let postCommentRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("post-comments").child(postID).child(commentID)
+            let postCommentRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("post-comments").child(self.postID).child(commentID)
             postCommentRef.setValue(true)
     }
 }
