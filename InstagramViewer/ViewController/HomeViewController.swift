@@ -119,7 +119,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func button_touchUp(_ sender: Any) {
-        self.performSegue(withIdentifier: "commentSegue", sender: nil)      }
+        self.performSegue(withIdentifier: "CommentSegue", sender: nil)      }
     
     // fetch the post info by using a given id
     func loadPostView(postID: String){

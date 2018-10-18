@@ -916,7 +916,7 @@
                     <connections>
                         <outlet property="sortButton" destination="XzO-9L-vun" id="euF-i5-YKy"/>
                         <outlet property="tableView" destination="dyG-pk-I6A" id="bHZ-9b-o4q"/>
-                        <segue destination="09C-Ni-bkJ" kind="show" identifier="commentSegue" id="X5K-h1-hQs"/>
+                        <segue destination="09C-Ni-bkJ" kind="show" identifier="CommentSegue" id="X5K-h1-hQs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6A-Sn-bKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1005,6 +1005,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="commentLabel" destination="Fg3-cM-k7w" id="dtU-zR-nit"/>
+                                            <outlet property="nameLable" destination="YQ2-MG-7O8" id="ItT-C7-PP4"/>
+                                            <outlet property="profifeImageView" destination="xDV-Vm-H5Q" id="eZq-ql-QPp"/>
                                             <outlet property="userComment" destination="Fg3-cM-k7w" id="9SK-Zp-wde"/>
                                             <outlet property="userName" destination="YQ2-MG-7O8" id="FfZ-Ww-Ihr"/>
                                             <outlet property="userProfile" destination="xDV-Vm-H5Q" id="pzV-k3-7nW"/>
@@ -1031,6 +1034,7 @@
                         <outlet property="bottonConstrain" destination="B6X-4x-rCs" id="ajZ-K5-uao"/>
                         <outlet property="commentTextField" destination="8EG-0s-4az" id="Jx0-DY-a0r"/>
                         <outlet property="sendButtonControl" destination="zZR-y5-bIF" id="szu-i2-Dxs"/>
+                        <outlet property="tableView" destination="jcx-Z8-WcX" id="x7U-8x-Kpk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Vf-5t-4em" userLabel="First Responder" sceneMemberID="firstResponder"/>
