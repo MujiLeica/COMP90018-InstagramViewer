@@ -36,8 +36,9 @@
 		D53D3A1367A7BE96CDFFBBEF /* Pods_InstagramViewerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C297ED5188A654A2D85B4DD9 /* Pods_InstagramViewerUITests.framework */; };
 		EB43C19F215B535D00E78812 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB43C19E215B535D00E78812 /* FilterCollectionViewCell.swift */; };
 		EB43C1A1215B53C000E78812 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB43C1A0215B53C000E78812 /* FilterViewController.swift */; };
-		EB47B3F02176F68900C14008 /* commentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47B3EF2176F68900C14008 /* commentTableViewCell.swift */; };
-		EB47B3F22176F71D00C14008 /* commentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47B3F12176F71D00C14008 /* commentViewController.swift */; };
+		EB47B3F421776A8C00C14008 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47B3F321776A8C00C14008 /* CommentViewController.swift */; };
+		EB47B3F8217858E000C14008 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47B3F7217858E000C14008 /* Comment.swift */; };
+		EB47B3FA2178709E00C14008 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47B3F92178709E00C14008 /* CommentTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,8 +99,9 @@
 		DD16E1DB6F6D45ECFA3B5A80 /* Pods-InstagramViewerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramViewerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramViewerUITests/Pods-InstagramViewerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EB43C19E215B535D00E78812 /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB43C1A0215B53C000E78812 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
-		EB47B3EF2176F68900C14008 /* commentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentTableViewCell.swift; sourceTree = "<group>"; };
-		EB47B3F12176F71D00C14008 /* commentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentViewController.swift; sourceTree = "<group>"; };
+		EB47B3F321776A8C00C14008 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		EB47B3F7217858E000C14008 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		EB47B3F92178709E00C14008 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		F4CA619A43B4F3082A88A39E /* Pods_InstagramViewerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramViewerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -177,6 +179,7 @@
 				63909A7221491423008C7E89 /* GoogleService-Info.plist */,
 				637DF3942142D4AD00BF5C83 /* Info.plist */,
 				637DF3912142D4AD00BF5C83 /* LaunchScreen.storyboard */,
+				EB47B3F92178709E00C14008 /* CommentTableViewCell.swift */,
 			);
 			path = InstagramViewer;
 			sourceTree = "<group>";
@@ -214,8 +217,7 @@
 				EB43C1A0215B53C000E78812 /* FilterViewController.swift */,
 				6A19534B215E65A200B368D5 /* UserSuggestedViewController.swift */,
 				63E12B352176E79000540430 /* EditProfileViewController.swift */,
-				EB47B3EF2176F68900C14008 /* commentTableViewCell.swift */,
-				EB47B3F12176F71D00C14008 /* commentViewController.swift */,
+				EB47B3F321776A8C00C14008 /* CommentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -227,6 +229,7 @@
 				6A9846DB215B37C600260677 /* UserApi.swift */,
 				6A01B3EF2160AEAA00A852BB /* FollowApi.swift */,
 				6A1582142161D25A00CBDFB6 /* FeedApi.swift */,
+				EB47B3F7217858E000C14008 /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -468,16 +471,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A9846DA215B353800260677 /* User.swift in Sources */,
+				EB47B3F8217858E000C14008 /* Comment.swift in Sources */,
 				637DF3B72142DC7100BF5C83 /* RegisterPageViewController.swift in Sources */,
+				EB47B3FA2178709E00C14008 /* CommentTableViewCell.swift in Sources */,
 				637DF38B2142D4AC00BF5C83 /* SecondViewController.swift in Sources */,
-				EB47B3F02176F68900C14008 /* commentTableViewCell.swift in Sources */,
 				6A9846D1215A47BE00260677 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				63D0B8D1215917FB0017BFC2 /* ProfileViewController.swift in Sources */,
 				6A1582152161D25A00CBDFB6 /* FeedApi.swift in Sources */,
 				6A9846DC215B37C600260677 /* UserApi.swift in Sources */,
 				631DC4112159385400B72234 /* HomeViewController.swift in Sources */,
 				631DC41321593E0800B72234 /* PostCell.swift in Sources */,
-				EB47B3F22176F71D00C14008 /* commentViewController.swift in Sources */,
+				EB47B3F421776A8C00C14008 /* CommentViewController.swift in Sources */,
 				6A19534C215E65A200B368D5 /* UserSuggestedViewController.swift in Sources */,
 				635D5971215A109E0098549E /* HomeTableViewCell.swift in Sources */,
 				EB43C1A1215B53C000E78812 /* FilterViewController.swift in Sources */,
