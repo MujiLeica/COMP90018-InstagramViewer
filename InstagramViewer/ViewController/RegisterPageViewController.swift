@@ -87,7 +87,7 @@ class RegisterPageViewController: UIViewController {
                                 let ref = Database.database().reference()
                                 let usersReference = ref.child("users")
                                 let newUserReference = usersReference.child(userID!)
-                                newUserReference.setValue(["username": username,"profileImageURL":profileImageURL])
+                                newUserReference.setValue(["username": username,"profileImageURL":profileImageURL,"numberOfPosts":1])
                                 //self.displayAlertMessage(alertMessage: "User Created")
                                 self.dismiss(animated: true, completion: nil)
                                 

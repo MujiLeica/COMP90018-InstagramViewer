@@ -124,6 +124,11 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                 
                 
                 let currentUser = Auth.auth().currentUser?.uid
+                // increase the number of posts under /user -> current user node
+                
+            
+                
+                
                 // put the posts to a new database tree
                 let DBref = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("posts")
                 let newPostId = DBref.childByAutoId().key
@@ -143,7 +148,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                         
                        
                         let timestamp = Int(Date().timeIntervalSince1970)
-                        print (timestamp)
+                       // print (timestamp)
                         
                         
                         newPostRef.setValue(["UserID":  currentUser!,"Path": postURL, "Caption": caption!, "Latitude": self.latitude!, "Longitude": self.longitude!, "Timestamp": timestamp])

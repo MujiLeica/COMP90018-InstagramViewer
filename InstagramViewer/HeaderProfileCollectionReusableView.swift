@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class HeaderProfileCollectionReusableView: UICollectionReusableView {
     
@@ -18,10 +19,12 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     
     @IBOutlet weak var followingCountLabel: UILabel!
     
+    var REF_USER_POSTS = Database.database().reference().child("userPosts")
+    let currentUserId = UserApi().CURRENT_USER?.uid
+    var noOfPosts:Int = 0
+    
     // display the "header" info corespond to the current user
     func updateView(){
-        
-        
         UserApi().REF_CURRENT_USER?.observeSingleEvent(of: .value, with:{
             snapshot in
             if let dict = snapshot.value as? [String:Any]{
@@ -34,10 +37,23 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
             }
             })
         
+        // make the myPostsCountLabel label displays the number of posts of the current user
+        UserApi().fetchCountMyPosts(userId: currentUserId!) { (count) in
+            self.myPostsCountLabel.text = "\(count)"
+        }
+        
+        // make the followingCountLabel label displays the number of people the user follows
+        FollowApi().fetchCountFollowing(userId: currentUserId!) { (count) in
+            self.followingCountLabel.text = "\(count)"
+        }
+        
+        // make the followersCountLabel label displays the number of people follows the user
+        FollowApi().fetchCountFollowers(userId: currentUserId!) { (count) in
+            self.followersCountLabel.text = "\(count)"
+        }
         
         
     }
-
-
+    
 
 }

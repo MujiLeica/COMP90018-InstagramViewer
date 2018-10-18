@@ -50,7 +50,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         if let location = locations.first {
             myLocation = location
             print ("My Location: ")
-            print (myLocation!)
+          //  print (myLocation!)
         }
     }
     
@@ -105,7 +105,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         // executed once when initiating and then executed when a new child added to the user's feed
         FeedApi().REF_FEED.child(userID!).observe(.childAdded) { (snapshot) in
             let postId = snapshot.key
-            print(snapshot)
+            // print(snapshot)
             //print(postId)
             // grap the new post id and use it to fetch post info
             self.loadPostView(postID: postId)
@@ -142,16 +142,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 // load post location into CLLocation
                 let postLocation = CLLocation(latitude: latitude, longitude: longitude)
                 print ("Post Location:")
-                print (postLocation)
-                print (self.myLocation!)
+             //   print (postLocation)
+            //    print (self.myLocation!)
                 // calculate the distance between user location and post location
                 let distance = self.myLocation!.distance(from: postLocation)
                 let post = PostCell(UserID: userID, captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
-                print("Post Distance: ")
-                print(post.distance)
+            //    print("Post Distance: ")
+            //    print(post.distance)
                 self.posts.insert(post, at: 0)
                 self.tableView.reloadData()
-                print(snapshot)
+          //      print(snapshot)
                 return
             }
             //print(snapshot)

@@ -21,8 +21,9 @@ class UserSuggestedCell: UITableViewCell {
             updateView()
         }
     }
+    
     func updateView() {
-        nameLabel.text = user?.email
+        nameLabel.text = user?.username
         if let photoUrlString = user?.profileImageUrl {
             let photoUrl = URL(string: photoUrlString)
             profileImg.sd_setImage(with: photoUrl, placeholderImage: UIImage(named: "placeholderImg"))

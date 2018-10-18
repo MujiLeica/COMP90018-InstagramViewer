@@ -14,6 +14,7 @@ class UserModel {
     var username: String?
     var id: String?
     var isFollowing: Bool?
+    var numberOfPosts:Int?
     
     // static var blockList: [UserModel] = []
 }
@@ -26,6 +27,7 @@ extension UserModel {
         // user.username = dict["username"] as? String
         user.username = user.email?.dropLast(10).lowercased()
         user.id = key
+        user.numberOfPosts = dict["numberOfPosts"] as? Int
         return user
     }
 }

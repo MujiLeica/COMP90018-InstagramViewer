@@ -11,6 +11,7 @@ import UIKit
 class UserSuggestedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+
     var usersSeggested:[UserModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +22,12 @@ class UserSuggestedViewController: UIViewController {
         UserApi().observeUsers { (user) in
             self.isFollowing(userId: user.id!, completed: {
                 (value) in
-                user.isFollowing = value
-                self.usersSeggested.append(user)
-                self.tableView.reloadData()
+                if(user.id==UserApi().CURRENT_USER?.uid){
+                    user.isFollowing = true
+                }else{
+                    user.isFollowing = value
+                    self.usersSeggested.append(user)
+                    self.tableView.reloadData()}
             })
         }
     }
