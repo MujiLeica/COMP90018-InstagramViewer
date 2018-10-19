@@ -49,8 +49,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             myLocation = location
-            print ("My Location: ")
-          //  print (myLocation!)
+//            print ("My Location: ")
+//            print (myLocation!)
         }
     }
     
@@ -105,9 +105,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         // executed once when initiating and then executed when a new child added to the user's feed
         FeedApi().REF_FEED.child(userID!).observe(.childAdded) { (snapshot) in
             let postId = snapshot.key
-            // print(snapshot)
-            //print(postId)
-            // grap the new post id and use it to fetch post info
+//            print(snapshot)
+//            print(postId)
+            //grap the new post id and use it to fetch post info
             self.loadPostView(postID: postId)
         }
         // called when a child is removed from the user's feed
@@ -141,7 +141,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 
                 // load post location into CLLocation
                 let postLocation = CLLocation(latitude: latitude, longitude: longitude)
-                print ("Post Location:")
+                //print ("Post Location:")
              //   print (postLocation)
             //    print (self.myLocation!)
                 // calculate the distance between user location and post location
