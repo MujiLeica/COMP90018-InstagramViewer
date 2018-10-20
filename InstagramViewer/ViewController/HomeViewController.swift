@@ -15,7 +15,6 @@ import CoreLocation
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sortButton: UIBarButtonItem!
-    
     var postsId = [String]()
     var postId:String?
     var posts = [PostCell]()
@@ -118,9 +117,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    @IBAction func button_touchUp(_ sender: Any) {
-        self.performSegue(withIdentifier: "CommentSegue", sender: nil)      }
-    
     // fetch the post info by using a given id
     func loadPostView(postID: String){
         Database.database().reference().child("posts").child(postID).observeSingleEvent(of: .value, with:{
@@ -157,6 +153,22 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             //print(snapshot)
         })
     }
+    
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "CommentSegue" {
+        let commentVC = segue.destination as! CommentViewController
+        let postCommentId = sender  as! String
+        commentVC.postId = postCommentId
+    }
+    
+    }
+    
+    
+    @IBAction func commentButton() {
+        if let id = postId {
+            self.performSegue(withIdentifier: "CommentSegue", sender: id)    }
+    
+}
 }
 
 // extension for table view

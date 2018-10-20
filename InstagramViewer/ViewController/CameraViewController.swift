@@ -251,4 +251,8 @@ extension CameraViewController: FilterViewControllerDelegate{
     func updateImage(image: UIImage) {
         self.photo.image = image
     }
+    
+    
+    
+    
 }

@@ -13,9 +13,10 @@ import FirebaseStorage
 
 class CommentViewController: UIViewController {
 
+    var postId: String!
     var comments = [Comment]()
     var users = [UserModel]()
-    let postID = NSUUID().uuidString
+   // let postID = NSUUID().uuidString
     
     @IBOutlet weak var sendButtonControl: UIButton!
     @IBOutlet weak var commentTextField: UITextField!
@@ -27,6 +28,7 @@ class CommentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Comment"
         tableView.dataSource = self
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -58,7 +60,7 @@ class CommentViewController: UIViewController {
     }
     func loadComments()
     {
-        let postCommentRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("post-comments").child(self.postID)
+        let postCommentRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("post-comments").child(self.postId)
         postCommentRef.observe(.childAdded, with: {
             snapshot in
             print("key obervating")
@@ -109,7 +111,7 @@ class CommentViewController: UIViewController {
             let newCommentReference = commentReference.child(commentID)
             let currentUser = Auth.auth().currentUser?.uid
             newCommentReference.setValue(["UserID":  currentUser!, "CommentText": commentTextField.text!])
-            let postCommentRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("post-comments").child(self.postID).child(commentID)
+            let postCommentRef = Database.database().reference(fromURL: "https://comp90018instagramviewer.firebaseio.com/").child("post-comments").child(self.postId).child(commentID)
             postCommentRef.setValue(true)
             self.empty()
             self.view.endEditing(true)
