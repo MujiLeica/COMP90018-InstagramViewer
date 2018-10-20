@@ -63,8 +63,9 @@ class UserApi {
     
     // search for users based on the keywords typed in the search bar
     func queryUsers(withText text: String, completion: @escaping (UserModel) -> Void) {
-        REF_USERS.queryOrdered(byChild: "username").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: {
+        REF_USERS.queryOrdered(byChild: "username").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").queryLimited(toFirst: 20).observeSingleEvent(of: .value, with: {
             snapshot in
+            
             snapshot.children.forEach({ (s) in
                 let child = s as! DataSnapshot
                 if let dict = child.value as? [String: Any] {

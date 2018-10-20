@@ -13,6 +13,7 @@ class UserSuggestedViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var usersSeggested:[UserModel] = []
+    var currentUser:UserModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUser()
@@ -25,9 +26,37 @@ class UserSuggestedViewController: UIViewController {
                 if(user.id==UserApi().CURRENT_USER?.uid){
                     user.isFollowing = true
                 }else{
-                    user.isFollowing = value
-                    self.usersSeggested.append(user)
-                    self.tableView.reloadData()}
+                    UserApi().observeUser(withId: (UserApi().CURRENT_USER?.uid)!, completion: { (currentUser) in
+                        self.currentUser = currentUser
+                        
+                        guard user.address != nil else{
+                            
+                            return
+                        }
+                        
+                        print(user.username)
+                        print(user.age)
+                        print(user.address)
+                        print(self.currentUser?.username)
+                        print(self.currentUser?.address)
+                        print(self.currentUser?.age)
+                        
+                        if (user.address == self.currentUser?.address){
+                            user.isFollowing = value
+                            self.usersSeggested.append(user)
+                            self.tableView.reloadData()
+                            
+                        }else if (user.age == self.currentUser?.age){
+                            user.isFollowing = value
+                            self.usersSeggested.append(user)
+                            self.tableView.reloadData()
+                            
+                        }
+                        
+                    })
+                    
+                    
+                    }
             })
         }
     }

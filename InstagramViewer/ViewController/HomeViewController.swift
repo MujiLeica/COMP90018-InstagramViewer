@@ -18,6 +18,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     var postsId = [String]()
     var postId:String?
+    var post:PostCell?
     var posts = [PostCell]()
     var RemovedPostUrl: String!
     var myLocation: CLLocation?
@@ -105,10 +106,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         // executed once when initiating and then executed when a new child added to the user's feed
         FeedApi().REF_FEED.child(userID!).observe(.childAdded) { (snapshot) in
             let postId = snapshot.key
-            // print(snapshot)
-            //print(postId)
-            // grap the new post id and use it to fetch post info
             self.loadPostView(postID: postId)
+            
         }
         // called when a child is removed from the user's feed
         FeedApi().observeFeedRemoved(withId: userID!) { (key) in
@@ -135,26 +134,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let latitude: CLLocationDegrees = postLatitude
                 let longitude: CLLocationDegrees = postLongitude
                 
-                //print(latitude, longitude)
-                //print (postLatitude, postLongitude)
-                //let postLocation = CLLocation(latitude: postLatitude, longitude: postLongitude)
+                self.postId = postID
                 
                 // load post location into CLLocation
                 let postLocation = CLLocation(latitude: latitude, longitude: longitude)
                 print ("Post Location:")
-             //   print (postLocation)
-            //    print (self.myLocation!)
                 // calculate the distance between user location and post location
                 let distance = self.myLocation!.distance(from: postLocation)
                 let post = PostCell(UserID: userID, captionText: captionText, postUrl: postUrlString, Latitude: postLatitude, Longitude: postLongitude, Timestamp: timestamp, PostDistance: distance, CellId: snapshot.key)
-            //    print("Post Distance: ")
-            //    print(post.distance)
+                self.post = post
                 self.posts.insert(post, at: 0)
                 self.tableView.reloadData()
-          //      print(snapshot)
                 return
             }
-            //print(snapshot)
         })
     }
 }
@@ -203,6 +195,13 @@ extension HomeViewController: UITableViewDataSource {
         
         cell.timestampLabel.text = timeText
         
+        cell.postId = self.postId
+        cell.post = self.post
+        cell.post?.postId = self.postId!
+
+        
+//        cell.post?.likeCount = 0
+        
         // load user name and profile image
         postUserId = post.userID
         UserApi().REF_USERS.child(postUserId!).observeSingleEvent(of: .value, with:{
@@ -218,8 +217,11 @@ extension HomeViewController: UITableViewDataSource {
             }
         })
 
+        
         return cell
     }
+    
+    
     
 }
 

@@ -24,6 +24,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
     var longitude: Double?
     @IBOutlet weak var filterButton: UIButton!
     let locationManager = CLLocationManager()
+    var post:PostCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,6 +153,7 @@ class CameraViewController: UIViewController, CropViewControllerDelegate, UIImag
                         
                         
                         newPostRef.setValue(["UserID":  currentUser!,"Path": postURL, "Caption": caption!, "Latitude": self.latitude!, "Longitude": self.longitude!, "Timestamp": timestamp])
+                        
                         
                         // update the "feed" database after successfully upload the image url to the storage
                         FeedApi().REF_FEED.child(currentUser!).child(newPostId).setValue(true)

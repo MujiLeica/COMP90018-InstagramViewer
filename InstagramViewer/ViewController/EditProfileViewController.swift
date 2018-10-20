@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class EditProfileViewController: UIViewController {
 
+    @IBOutlet weak var ageLabel: UITextField!
+    @IBOutlet weak var addressLabel: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
     }
-
+    
+    @IBAction func saveBtn_Touch(_ sender: Any) {
+        UserApi().REF_USERS.child((UserApi().CURRENT_USER?.uid)!).child("age").setValue(ageLabel.text)
+        UserApi().REF_USERS.child((UserApi().CURRENT_USER?.uid)!).child("address").setValue(addressLabel.text)
+    }
+    
     @IBAction func cancelButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
