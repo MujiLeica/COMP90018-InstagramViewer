@@ -116,6 +116,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+    @IBAction func commentButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "CommentSegue", sender: nil)    }
+    
     // fetch the post info by using a given id
     func loadPostView(postID: String){
         Database.database().reference().child("posts").child(postID).observeSingleEvent(of: .value, with:{
@@ -146,22 +149,22 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "CommentSegue" {
-        let commentVC = segue.destination as! CommentViewController
-        let postCommentId = sender  as! String
-        commentVC.postId = postCommentId
-    }
+//override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    if segue.identifier == "CommentSegue" {
+//        let commentVC = segue.destination as! CommentViewController
+//        let postCommentId = sender  as! String
+//        commentVC.postId = postCommentId
+//    }
+//
+//    }
     
-    }
     
-    
-    @IBAction func commentButton() {
-        if let id = postId {
-            self.performSegue(withIdentifier: "CommentSegue", sender: id)    }
+//    @IBAction func commentButton() {
+//        if let id = postId {
+//            self.performSegue(withIdentifier: "CommentSegue", sender: id)    }
     
 }
-}
+
 
 // extension for table view
 extension HomeViewController: UITableViewDataSource {

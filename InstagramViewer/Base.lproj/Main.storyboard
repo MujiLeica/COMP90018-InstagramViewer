@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="srT-VI-ueA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="srT-VI-ueA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -506,7 +505,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImg" translatesAutoresizingMaskIntoConstraints="NO" id="eoK-zR-7gn">
-                                            <rect key="frame" x="23" y="23" width="100" height="100"/>
+                                            <rect key="frame" x="23" y="43" width="100" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="4ry-WE-qMJ"/>
                                                 <constraint firstAttribute="width" constant="100" id="vMh-cA-mbC"/>
@@ -518,7 +517,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bDn-bq-pzD">
-                                            <rect key="frame" x="131" y="23" width="228" height="64"/>
+                                            <rect key="frame" x="131" y="43" width="228" height="64"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vUh-Rz-it1">
                                                     <rect key="frame" x="8" y="8" width="38.5" height="36"/>
@@ -602,13 +601,13 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEc-7g-vVp">
-                                            <rect key="frame" x="23" y="138" width="0.0" height="0.0"/>
+                                            <rect key="frame" x="23" y="158" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyJ-CX-Fkh">
-                                            <rect key="frame" x="131" y="95" width="236" height="30"/>
+                                            <rect key="frame" x="131" y="115" width="236" height="30"/>
                                             <color key="backgroundColor" red="0.88627450980392153" green="0.90196078431372551" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Edit Profile">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -957,7 +956,7 @@
                                                     <rect key="frame" x="8" y="378" width="65" height="30"/>
                                                     <state key="normal" title="comment"/>
                                                     <connections>
-                                                        <action selector="commentButton:" destination="zt5-F8-2Uu" eventType="touchUpInside" id="SI5-9H-9Rs"/>
+                                                        <action selector="commentButton:" destination="zt5-F8-2Uu" eventType="touchUpInside" id="Thv-FL-QDU"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
